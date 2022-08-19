@@ -1,0 +1,68 @@
+version: '3'
+
+services:
+  tntdnode0:
+    container_name: tntdnode0
+    image: "binance/tntdnode"
+    ports:
+      - "26656-26657:26656-26657"
+    environment:
+      - ID=0
+      - LOG=${LOG:-tntchaind.log}
+    volumes:
+      - ./build:/tntchaind:Z
+    networks:
+      localnet:
+        ipv4_address: 172.20.0.2
+
+  tntdnode1:
+    container_name: tntdnode1
+    image: "binance/tntdnode"
+    ports:
+      - "26659-26660:26656-26657"
+    environment:
+      - ID=1
+      - LOG=${LOG:-tntchaind.log}
+    volumes:
+      - ./build:/tntchaind:Z
+    networks:
+      localnet:
+        ipv4_address: 172.20.0.3
+
+  tntdnode2:
+    container_name: tntdnode2
+    image: "binance/tntdnode"
+    environment:
+      - ID=2
+      - LOG=${LOG:-tntchaind.log}
+    ports:
+      - "26661-26662:26656-26657"
+    volumes:
+      - ./build:/tntchaind:Z
+    networks:
+      localnet:
+        ipv4_address: 172.20.0.4
+
+  tntdnode3:
+    container_name: tntdnode3
+    image: "binance/tntdnode"
+    environment:
+      - ID=3
+      - LOG=${LOG:-tntchaind.log}
+    ports:
+      - "26663-26664:26656-26657"
+    volumes:
+      - ./build:/tntchaind:Z
+    networks:
+      localnet:
+        ipv4_address: 172.20.0.5
+
+networks:
+  localnet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      -
+        subnet: 172.20.0.0/16
+
