@@ -545,7 +545,7 @@ func collectOrdersToPublish(
 
 	// the following two maps are used to update fee field we published
 	// more detail can be found at:
-	// https://github.com/tnt-chain/docs-site/wiki/Fee-Calculation,-Collection-and-Distribution#publication
+	// https://github.com/bnb-chain/docs-site/wiki/Fee-Calculation,-Collection-and-Distribution#publication
 	chargedCancels := make(map[string]int)
 	chargedExpires := make(map[string]int)
 

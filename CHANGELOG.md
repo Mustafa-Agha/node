@@ -172,7 +172,7 @@ BUG FIXES
 
 DEPENDENCIES
 
-* [\#87](https://github.com/tnt-chain/bnc-tendermint/pull/87) [tendermint] upgrade from v0.30.1 to 0.31.5
+* [\#87](https://github.com/bnb-chain/bnc-tendermint/pull/87) [tendermint] upgrade from v0.30.1 to 0.31.5
 
 ## 0.5.10
 BUG FIXES

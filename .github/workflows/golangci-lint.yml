@@ -26,6 +26,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
       - run: git config --global url."https://${{ secrets.GH_ACCESS_TOKEN }}@github.com".insteadOf "https://github.com"
-      - run: go env -w GOPRIVATE="github.com/tnt-chain/*"
+      - run: go env -w GOPRIVATE="github.com/bnb-chain/*"
       - name: golangci-lint
         run: make lint
