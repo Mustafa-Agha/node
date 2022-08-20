@@ -15,7 +15,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/server"
 
 	"github.com/Mustafa-Agha/node/app"
-	tntInit "github.com/Mustafa-Agha/node/cmd/tntchaind/init"
+	ceInit "github.com/Mustafa-Agha/node/cmd/cechaind/init"
 	"github.com/Mustafa-Agha/node/version"
 )
 
@@ -33,21 +33,21 @@ func main() {
 	ctx := app.ServerContext
 
 	rootCmd := &cobra.Command{
-		Use:               "tntchaind",
-		Short:             "TNTChain Daemon (server)",
+		Use:               "cechaind",
+		Short:             "CEChain Daemon (server)",
 		PersistentPreRunE: app.PersistentPreRunEFn(ctx),
 	}
 
 	appInit := app.BinanceAppInit()
-	rootCmd.AddCommand(tntInit.InitCmd(ctx.ToCosmosServerCtx(), cdc, appInit))
-	rootCmd.AddCommand(tntInit.TestnetFilesCmd(ctx.ToCosmosServerCtx(), cdc, appInit))
-	rootCmd.AddCommand(tntInit.CollectGenTxsCmd(cdc, appInit))
+	rootCmd.AddCommand(ceInit.InitCmd(ctx.ToCosmosServerCtx(), cdc, appInit))
+	rootCmd.AddCommand(ceInit.TestnetFilesCmd(ctx.ToCosmosServerCtx(), cdc, appInit))
+	rootCmd.AddCommand(ceInit.CollectGenTxsCmd(cdc, appInit))
 	rootCmd.AddCommand(version.VersionCmd)
 	server.AddCommands(ctx.ToCosmosServerCtx(), cdc, rootCmd, exportAppStateAndTMValidators)
 	startCmd := server.StartCmd(ctx.ToCosmosServerCtx(), newApp)
 	startCmd.Flags().Int64VarP(&ctx.PublicationConfig.FromHeightInclusive, "fromHeight", "f", 1, "from which height (inclusive) we want publish market data")
 	rootCmd.AddCommand(startCmd)
-	rootCmd.AddCommand(tntInit.SnapshotCmd(ctx.ToCosmosServerCtx(), cdc))
+	rootCmd.AddCommand(ceInit.SnapshotCmd(ctx.ToCosmosServerCtx(), cdc))
 
 	// prepare and add flags
 	executor := cli.PrepareBaseCmd(rootCmd, "BC", app.DefaultNodeHome)

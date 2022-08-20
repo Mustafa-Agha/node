@@ -120,7 +120,7 @@ func MultiSendCmd(cdc *wire.Codec) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().String(flagTransfers, "", "Transfers details, format: [{\"to\": \"addr\", \"amount\": \"1:TNT,2:BTC\"}, ...]")
+	cmd.Flags().String(flagTransfers, "", "Transfers details, format: [{\"to\": \"addr\", \"amount\": \"1:CE,2:BTC\"}, ...]")
 	cmd.Flags().String(flagTransfersFile, "", "File of transfers details, if transfers-file is not empty, --transfers will be ignored")
 
 	return cmd

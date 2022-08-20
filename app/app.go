@@ -63,13 +63,13 @@ import (
 )
 
 const (
-	appName = "TNTChain"
+	appName = "CEChain"
 )
 
 // default home directories for expected binaries
 var (
-	DefaultCLIHome      = os.ExpandEnv("$HOME/.tntcli")
-	DefaultNodeHome     = os.ExpandEnv("$HOME/.tntchaind")
+	DefaultCLIHome      = os.ExpandEnv("$HOME/.cecli")
+	DefaultNodeHome     = os.ExpandEnv("$HOME/.cechaind")
 	Bech32PrefixAccAddr string
 )
 
@@ -81,7 +81,7 @@ var (
 	ServerContext = config.NewDefaultContext()
 )
 
-// BinanceChain is the TNTChain ABCI application
+// BinanceChain is the CEChain ABCI application
 type BinanceChain struct {
 	*baseapp.BaseApp
 	Codec *wire.Codec

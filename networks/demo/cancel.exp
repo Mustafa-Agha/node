@@ -8,9 +8,9 @@ set home [lindex $argv 4]
 
 set timeout 30
 	if {"$home" == ""} {
-		spawn ./tntcli dex cancel -l $symbol --from $from --chain-id=$chain_id -f $id
+		spawn ./cecli dex cancel -l $symbol --from $from --chain-id=$chain_id -f $id
 	} else {
-		spawn ./tntcli dex cancel -l $symbol --home $home --from $from --chain-id=$chain_id -f $id
+		spawn ./cecli dex cancel -l $symbol --home $home --from $from --chain-id=$chain_id -f $id
 	}
 	expect "Password*"
 	send "12345678\r"

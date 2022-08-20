@@ -22,8 +22,8 @@ IMPROVEMENTS
 * [\#843](https://github.com/Mustafa-Agha/node/pull/843) [Code] Remove useless code
 * [\#844](https://github.com/Mustafa-Agha/node/pull/844) [Build] Add go compiler build flags
 * [\#845](https://github.com/Mustafa-Agha/node/pull/845) [Code] Tidy todo comments
-* [\#846](https://github.com/Mustafa-Agha/node/pull/846) [Code] Change wording binance to tnt
-* [\#847](https://github.com/Mustafa-Agha/node/pull/847) [Code] Rename import path binance-chain with tnt-chain
+* [\#846](https://github.com/Mustafa-Agha/node/pull/846) [Code] Change wording binance to ce
+* [\#847](https://github.com/Mustafa-Agha/node/pull/847) [Code] Rename import path binance-chain with ce-chain
 * [\#852](https://github.com/Mustafa-Agha/node/pull/852) [R4R] Replace ioutil with io/os
 * [\#853](https://github.com/Mustafa-Agha/node/pull/853) [R4R] Change file permissions
 * [\#857](https://github.com/Mustafa-Agha/node/pull/857) [CI] Add workflows to check tests and build release
@@ -58,7 +58,7 @@ BUG FIXES
 
 ## 0.8.0-hf.1
 BUG FIXES
-[CLI] tntcli API Server get token issue
+[CLI] cecli API Server get token issue
 
 ## 0.8.0
 FEATURES
@@ -126,7 +126,7 @@ BUG FIXES
 
 ## 0.6.1-hf.3
 BUG FIXES
-* [\#654](https://github.com/Mustafa-Agha/node/pull/654) [Dex] fix can't bring tntchaind back when there is an order whose symbol is lower case
+* [\#654](https://github.com/Mustafa-Agha/node/pull/654) [Dex] fix can't bring cechaind back when there is an order whose symbol is lower case
 
 ## 0.6.1-hf.2
 BUG FIXES
@@ -161,9 +161,9 @@ IMPROVEMENTS
 * [\#593](https://github.com/Mustafa-Agha/node/pull/593) [Config] add store and msg types upgrade config
 * [\#586](https://github.com/Mustafa-Agha/node/pull/586) [Deps] upgrade tendermint
 * [\#576](https://github.com/Mustafa-Agha/node/pull/576) [Param] apply strict feeparam change proposal check
-* [\#574](https://github.com/Mustafa-Agha/node/pull/574) [Deps] remove ledger tags from tntchaind
+* [\#574](https://github.com/Mustafa-Agha/node/pull/574) [Deps] remove ledger tags from cechaind
 * [\#573](https://github.com/Mustafa-Agha/node/pull/573) [Deps] remove indirect dependency btcd in gopkg.toml
-* [\#571](https://github.com/Mustafa-Agha/node/pull/571) [CLI] make tntcli to support ledger
+* [\#571](https://github.com/Mustafa-Agha/node/pull/571) [CLI] make cecli to support ledger
 * [\#568](https://github.com/Mustafa-Agha/node/pull/568) [StateSync] parity warp-like state sync
 
 BUG FIXES

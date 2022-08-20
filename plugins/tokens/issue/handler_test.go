@@ -24,8 +24,8 @@ func setup() (sdk.Context, sdk.Handler, auth.AccountKeeper, store.Mapper) {
 	ms, capKey1, capKey2, _ := testutils.SetupThreeMultiStoreForUnitTest()
 	cdc := wire.NewCodec()
 	cdc.RegisterInterface((*types.IToken)(nil), nil)
-	cdc.RegisterConcrete(&types.Token{}, "tntchain/Token", nil)
-	cdc.RegisterConcrete(&types.MiniToken{}, "tntchain/MiniToken", nil)
+	cdc.RegisterConcrete(&types.Token{}, "cechain/Token", nil)
+	cdc.RegisterConcrete(&types.MiniToken{}, "cechain/MiniToken", nil)
 	tokenMapper := store.NewMapper(cdc, capKey1)
 	accountKeeper := auth.NewAccountKeeper(cdc, capKey2, auth.ProtoBaseAccount)
 	bankKeeper := bank.NewBaseKeeper(accountKeeper)
@@ -51,12 +51,12 @@ func TestHandleIssueToken(t *testing.T) {
 	_, acc := testutils.NewAccount(ctx, accountKeeper, 100e8)
 
 	ctx = ctx.WithValue(baseapp.TxHashKey, "000")
-	msg := NewIssueMsg(acc.GetAddress(), "New TNT", "NNB", 100000e8, false)
+	msg := NewIssueMsg(acc.GetAddress(), "New CE", "NNB", 100000e8, false)
 	sdkResult := handler(ctx, msg)
 	require.Equal(t, true, sdkResult.Code.IsOK())
 	token, err := tokenMapper.GetToken(ctx, "NNB-000")
 	require.NoError(t, err)
-	expectedToken, err := types.NewToken("New TNT", "NNB-000", 100000e8, acc.GetAddress(), false)
+	expectedToken, err := types.NewToken("New CE", "NNB-000", 100000e8, acc.GetAddress(), false)
 	require.Equal(t, expectedToken, token)
 
 	sdkResult = handler(ctx, msg)
@@ -70,7 +70,7 @@ func TestHandleMintToken(t *testing.T) {
 	sdkResult := handler(ctx, mintMsg)
 	require.Contains(t, sdkResult.Log, "symbol(NNB-000) does not exist")
 
-	issueMsg := NewIssueMsg(acc.GetAddress(), "New TNT", "NNB", 100000e8, true)
+	issueMsg := NewIssueMsg(acc.GetAddress(), "New CE", "NNB", 100000e8, true)
 	ctx = ctx.WithValue(baseapp.TxHashKey, "000")
 	sdkResult = handler(ctx, issueMsg)
 	require.Equal(t, true, sdkResult.Code.IsOK())
@@ -80,7 +80,7 @@ func TestHandleMintToken(t *testing.T) {
 
 	token, err := tokenMapper.GetToken(ctx, "NNB-000")
 	require.NoError(t, err)
-	expectedToken, err := types.NewToken("New TNT", "NNB-000", 110000e8, acc.GetAddress(), true)
+	expectedToken, err := types.NewToken("New CE", "NNB-000", 110000e8, acc.GetAddress(), true)
 	require.Equal(t, expectedToken, token)
 
 	invalidMintMsg := NewMintMsg(acc.GetAddress(), "NNB-000", types.TokenMaxTotalSupply)
@@ -93,7 +93,7 @@ func TestHandleMintToken(t *testing.T) {
 	require.Contains(t, sdkResult.Log, "only the owner can mint token NNB")
 
 	// issue a non-mintable token
-	issueMsg = NewIssueMsg(acc.GetAddress(), "New TNT2", "NNB2", 100000e8, false)
+	issueMsg = NewIssueMsg(acc.GetAddress(), "New CE2", "NNB2", 100000e8, false)
 	ctx = ctx.WithValue(baseapp.TxHashKey, "000")
 	sdkResult = handler(ctx, issueMsg)
 	require.Equal(t, true, sdkResult.Code.IsOK())
@@ -103,6 +103,6 @@ func TestHandleMintToken(t *testing.T) {
 	require.Contains(t, sdkResult.Log, "token(NNB2-000) cannot be minted")
 
 	// mint native token
-	invalidMintMsg = NewMintMsg(acc.GetAddress(), "TNT", 10000e8)
+	invalidMintMsg = NewMintMsg(acc.GetAddress(), "CE", 10000e8)
 	require.Contains(t, invalidMintMsg.ValidateBasic().Error(), "cannot mint native token")
 }

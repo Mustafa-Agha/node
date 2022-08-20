@@ -1,6 +1,6 @@
 {
   "genesis_time": "2019-04-18T05:59:26.228734998Z",
-  "chain_id": "Titanium-Chain-Tigris",
+  "chain_id": 69,
   "consensus_params": {
     "block_size": {
       "max_bytes": "1048576",
@@ -19,122 +19,122 @@
   "app_state": {
     "tokens": [
       {
-        "name": "Titanium Chain Native Token",
-        "symbol": "TNT",
+        "name": "Crypto Express Smart Chain",
+        "symbol": "CE",
         "total_supply": "20000000000000000",
-        "owner": "tnt1ultyhpw2p2ktvr68swz56570lgj2rdsadq3ym2",
+        "owner": "ce1ultyhpw2p2ktvr68swz56570lgj2rdsadq3ym2",
         "mintable": false
       }
     ],
     "accounts": [
       {
         "name": "Aconcagua",
-        "address": "tnt1y888axmhzz6yjj464syfy68mkhzy9phlv8fzac",
+        "address": "ce1y888axmhzz6yjj464syfy68mkhzy9phlv8fzac",
         "consensus_addr": ""
       },
       {
         "name": "Aconcagua",
-        "address": "tnt1kdx4xkktr35j2mpxncvtsshswj5gq577me7lx4",
+        "address": "ce1kdx4xkktr35j2mpxncvtsshswj5gq577me7lx4",
         "consensus_addr": "A71E5CD078B8C5C7B1AF88BCE84DD70B0557D93E"
       },
       {
         "name": "Ararat",
-        "address": "tnt15hx3frkdu7vajy2eulu80vl97vehnhyavu927v",
+        "address": "ce15hx3frkdu7vajy2eulu80vl97vehnhyavu927v",
         "consensus_addr": ""
       },
       {
         "name": "Ararat",
-        "address": "tnt1slq53dua0nj3e6y949u4yc3erus0t68k37jcwh",
+        "address": "ce1slq53dua0nj3e6y949u4yc3erus0t68k37jcwh",
         "consensus_addr": "B7707D9F593C62E85BB9E1A2366D12A97CD5DFF2"
       },
       {
         "name": "Carrauntoohil",
-        "address": "tnt1jw9xup8arde2jzarzcs2fv49hh28uad92m4ke0",
+        "address": "ce1jw9xup8arde2jzarzcs2fv49hh28uad92m4ke0",
         "consensus_addr": ""
       },
       {
         "name": "Carrauntoohil",
-        "address": "tnt139l5umk42mam3znr568gw706fwvp485kw5zks3",
+        "address": "ce139l5umk42mam3znr568gw706fwvp485kw5zks3",
         "consensus_addr": "1175946A48EAA473868A0A6F52E6C66CCAF472EA"
       },
       {
         "name": "Elbrus",
-        "address": "tnt1tpagqqqx36gq09kzw4f5a3a9sk3tq54dpl5ldn",
+        "address": "ce1tpagqqqx36gq09kzw4f5a3a9sk3tq54dpl5ldn",
         "consensus_addr": ""
       },
       {
         "name": "Elbrus",
-        "address": "tnt1l8e7nvtl0jn7jps8mc9usum6t3wsdr0a736q9x",
+        "address": "ce1l8e7nvtl0jn7jps8mc9usum6t3wsdr0a736q9x",
         "consensus_addr": "7235EF143D20FC0ABC427615D83014BB02D7C06C"
       },
       {
         "name": "Everest",
-        "address": "tnt19hunw9ps8n9tkrp2j64jvheezgqmfc2eyrxd7a",
+        "address": "ce19hunw9ps8n9tkrp2j64jvheezgqmfc2eyrxd7a",
         "consensus_addr": ""
       },
       {
         "name": "Everest",
-        "address": "tnt1z79qgmv2e9xm6p24f2el0a2evxzyvnsnps0mvx",
+        "address": "ce1z79qgmv2e9xm6p24f2el0a2evxzyvnsnps0mvx",
         "consensus_addr": "B0FBB52FF7EE93CC476DFE6B74FA1FC88584F30D"
       },
       {
         "name": "Fuji",
-        "address": "tnt19klje94mnu53wj7pmrk0zmtpwgr0uz8th0fcvw",
+        "address": "ce19klje94mnu53wj7pmrk0zmtpwgr0uz8th0fcvw",
         "consensus_addr": ""
       },
       {
         "name": "Fuji",
-        "address": "tnt1atdghwrh7wy36frauvl9mem9x4rxhe85fx33t6",
+        "address": "ce1atdghwrh7wy36frauvl9mem9x4rxhe85fx33t6",
         "consensus_addr": "A9157B3FA6EB4C1E396B9B746E95327A07DC42E5"
       },
       {
         "name": "Gahinga",
-        "address": "tnt17kfuzeza2kn46yqx4twxxmlw2jk2ywp5x4gze2",
+        "address": "ce17kfuzeza2kn46yqx4twxxmlw2jk2ywp5x4gze2",
         "consensus_addr": ""
       },
       {
         "name": "Gahinga",
-        "address": "tnt1h9ymecpakr8p8lhchtah2xxx7x4xq099umclqu",
+        "address": "ce1h9ymecpakr8p8lhchtah2xxx7x4xq099umclqu",
         "consensus_addr": "71F253E6FEA9EDD4B4753F5483549FE4F0F3A21C"
       },
       {
         "name": "Kita",
-        "address": "tnt13m056plt2646zse2mwxfft92xawnky4nmncxc3",
+        "address": "ce13m056plt2646zse2mwxfft92xawnky4nmncxc3",
         "consensus_addr": ""
       },
       {
         "name": "Kita",
-        "address": "tnt167z5qvur7xu85q885l906dgcwmgsvm3ppdarpf",
+        "address": "ce167z5qvur7xu85q885l906dgcwmgsvm3ppdarpf",
         "consensus_addr": "414FB3BBA216AF84C47E07D6EBAA2DCFC3563A2F"
       },
       {
         "name": "Scafell",
-        "address": "tnt16k0gajcczwgymfkk0zsysjzl0sxyxdfckplxlr",
+        "address": "ce16k0gajcczwgymfkk0zsysjzl0sxyxdfckplxlr",
         "consensus_addr": ""
       },
       {
         "name": "Scafell",
-        "address": "tnt10fg9t982xa35ddy6v8f5y06hf9hmx6tte4xlpa",
+        "address": "ce10fg9t982xa35ddy6v8f5y06hf9hmx6tte4xlpa",
         "consensus_addr": "14CFCE69B645F3F88BAF08EA5B77FA521E4480F9"
       },
       {
         "name": "Seoraksan",
-        "address": "tnt1xaef2agzycsww32fqyggnk5xgqxs8780vfv2kh",
+        "address": "ce1xaef2agzycsww32fqyggnk5xgqxs8780vfv2kh",
         "consensus_addr": ""
       },
       {
         "name": "Seoraksan",
-        "address": "tnt1u5mvgkqt9rmj4fut60rnpqfv0a865pwnn90v9q",
+        "address": "ce1u5mvgkqt9rmj4fut60rnpqfv0a865pwnn90v9q",
         "consensus_addr": "17B42E8F284D3CA0E420262F89CD76C749BB12C9"
       },
       {
         "name": "Zugspitze",
-        "address": "tnt1jstexazk7zateuwzzwllswu4j3dsllu3dgte4m",
+        "address": "ce1jstexazk7zateuwzzwllswu4j3dsllu3dgte4m",
         "consensus_addr": ""
       },
       {
         "name": "Zugspitze",
-        "address": "tnt1aanuahm2c9z5syvwsk4792vddtp74jkme5d38l",
+        "address": "ce1aanuahm2c9z5syvwsk4792vddtp74jkme5d38l",
         "consensus_addr": "3CD4AABABDDEB7ABFEA9618732E331077A861D2B"
       }
     ],
@@ -298,7 +298,7 @@
       "params": {
         "unbonding_time": "604800000000000",
         "max_validators": 21,
-        "bond_denom": "TNT"
+        "bond_denom": "CE"
       },
       "validators": null,
       "bonds": null
@@ -308,7 +308,7 @@
       "deposit_params": {
         "min_deposit": [
           {
-            "denom": "TNT",
+            "denom": "CE",
             "amount": "100000000000"
           }
         ],
@@ -340,14 +340,14 @@
                     "max_rate": "0",
                     "max_change_rate": "0"
                   },
-                  "delegator_address": "tnt1y888axmhzz6yjj464syfy68mkhzy9phlv8fzac",
+                  "delegator_address": "ce1y888axmhzz6yjj464syfy68mkhzy9phlv8fzac",
                   "validator_address": "bva1kdx4xkktr35j2mpxncvtsshswj5gq577m9l0c3",
                   "pubkey": {
                     "type": "tendermint/PubKeyEd25519",
                     "value": "Xj/NowvRnUXEtzaI2jXn2h/OfGhZssHyDtUgLSQUTj4="
                   },
                   "delegation": {
-                    "denom": "TNT",
+                    "denom": "CE",
                     "amount": "1000000000000"
                   }
                 },
@@ -399,14 +399,14 @@
                     "max_rate": "0",
                     "max_change_rate": "0"
                   },
-                  "delegator_address": "tnt15hx3frkdu7vajy2eulu80vl97vehnhyavu927v",
+                  "delegator_address": "ce15hx3frkdu7vajy2eulu80vl97vehnhyavu927v",
                   "validator_address": "bva1slq53dua0nj3e6y949u4yc3erus0t68k3zngsn",
                   "pubkey": {
                     "type": "tendermint/PubKeyEd25519",
                     "value": "cfLXuOwci5mmU0KbARjNIB95T0CdD+pNZbG2YvKwAGM="
                   },
                   "delegation": {
-                    "denom": "TNT",
+                    "denom": "CE",
                     "amount": "1000000000000"
                   }
                 },
@@ -458,14 +458,14 @@
                     "max_rate": "0",
                     "max_change_rate": "0"
                   },
-                  "delegator_address": "tnt1jw9xup8arde2jzarzcs2fv49hh28uad92m4ke0",
+                  "delegator_address": "ce1jw9xup8arde2jzarzcs2fv49hh28uad92m4ke0",
                   "validator_address": "bva139l5umk42mam3znr568gw706fwvp485kwgrxw4",
                   "pubkey": {
                     "type": "tendermint/PubKeyEd25519",
                     "value": "03adih94tMF6ll96MNQYH6u9H5afRtPI6Dta1IRUIdg="
                   },
                   "delegation": {
-                    "denom": "TNT",
+                    "denom": "CE",
                     "amount": "1000000000000"
                   }
                 },
@@ -517,14 +517,14 @@
                     "max_rate": "0",
                     "max_change_rate": "0"
                   },
-                  "delegator_address": "tnt1tpagqqqx36gq09kzw4f5a3a9sk3tq54dpl5ldn",
+                  "delegator_address": "ce1tpagqqqx36gq09kzw4f5a3a9sk3tq54dpl5ldn",
                   "validator_address": "bva1l8e7nvtl0jn7jps8mc9usum6t3wsdr0a7dmsmz",
                   "pubkey": {
                     "type": "tendermint/PubKeyEd25519",
                     "value": "6B03l+BUTDpxjh8F8Pt4IhLiSOeEwahRvofneuDbIw4="
                   },
                   "delegation": {
-                    "denom": "TNT",
+                    "denom": "CE",
                     "amount": "1000000000000"
                   }
                 },
@@ -576,14 +576,14 @@
                     "max_rate": "0",
                     "max_change_rate": "0"
                   },
-                  "delegator_address": "tnt19hunw9ps8n9tkrp2j64jvheezgqmfc2eyrxd7a",
+                  "delegator_address": "ce19hunw9ps8n9tkrp2j64jvheezgqmfc2eyrxd7a",
                   "validator_address": "bva1z79qgmv2e9xm6p24f2el0a2evxzyvnsnpvwtjz",
                   "pubkey": {
                     "type": "tendermint/PubKeyEd25519",
                     "value": "DJEOL+ZQ5OAUBrMxC0iftgqEvD/1xb7jpW1YmLaorzI="
                   },
                   "delegation": {
-                    "denom": "TNT",
+                    "denom": "CE",
                     "amount": "1000000000000"
                   }
                 },
@@ -635,14 +635,14 @@
                     "max_rate": "0",
                     "max_change_rate": "0"
                   },
-                  "delegator_address": "tnt19klje94mnu53wj7pmrk0zmtpwgr0uz8th0fcvw",
+                  "delegator_address": "ce19klje94mnu53wj7pmrk0zmtpwgr0uz8th0fcvw",
                   "validator_address": "bva1atdghwrh7wy36frauvl9mem9x4rxhe85f6sp47",
                   "pubkey": {
                     "type": "tendermint/PubKeyEd25519",
                     "value": "sGpZotdb9dAU/OfJmbXnHnqWCHD3JYR9S6MjW66qCO8="
                   },
                   "delegation": {
-                    "denom": "TNT",
+                    "denom": "CE",
                     "amount": "1000000000000"
                   }
                 },
@@ -694,14 +694,14 @@
                     "max_rate": "0",
                     "max_change_rate": "0"
                   },
-                  "delegator_address": "tnt17kfuzeza2kn46yqx4twxxmlw2jk2ywp5x4gze2",
+                  "delegator_address": "ce17kfuzeza2kn46yqx4twxxmlw2jk2ywp5x4gze2",
                   "validator_address": "bva1h9ymecpakr8p8lhchtah2xxx7x4xq099u8e07c",
                   "pubkey": {
                     "type": "tendermint/PubKeyEd25519",
                     "value": "A1PGOfgMyAFZRENtqxAyJF1E+RLtwx72aP+fSkXNBZk="
                   },
                   "delegation": {
-                    "denom": "TNT",
+                    "denom": "CE",
                     "amount": "1000000000000"
                   }
                 },
@@ -753,14 +753,14 @@
                     "max_rate": "0",
                     "max_change_rate": "0"
                   },
-                  "delegator_address": "tnt13m056plt2646zse2mwxfft92xawnky4nmncxc3",
+                  "delegator_address": "ce13m056plt2646zse2mwxfft92xawnky4nmncxc3",
                   "validator_address": "bva167z5qvur7xu85q885l906dgcwmgsvm3pp3unld",
                   "pubkey": {
                     "type": "tendermint/PubKeyEd25519",
                     "value": "lEbRSthsjS10eAsIRxEAAaHC4lLu3+pHU+u7/OOiL1I="
                   },
                   "delegation": {
-                    "denom": "TNT",
+                    "denom": "CE",
                     "amount": "1000000000000"
                   }
                 },
@@ -812,14 +812,14 @@
                     "max_rate": "0",
                     "max_change_rate": "0"
                   },
-                  "delegator_address": "tnt16k0gajcczwgymfkk0zsysjzl0sxyxdfckplxlr",
+                  "delegator_address": "ce16k0gajcczwgymfkk0zsysjzl0sxyxdfckplxlr",
                   "validator_address": "bva10fg9t982xa35ddy6v8f5y06hf9hmx6ttef80le",
                   "pubkey": {
                     "type": "tendermint/PubKeyEd25519",
                     "value": "K6ToFUL0N7euH4o13bIzx4mo3CJzQ3fZttY68cpAO2E="
                   },
                   "delegation": {
-                    "denom": "TNT",
+                    "denom": "CE",
                     "amount": "1000000000000"
                   }
                 },
@@ -842,7 +842,7 @@
                 "type": "tendermint/PubKeySecp256k1",
                 "value": "AkIZ4rTzTCQnXID0RrJAbWbuL7/39SUpO9Yzg/DoJ2nn"
               },
-              "signature": "xTbs2pScagYfryZ0gEy5BVX0PIk1aVHJaFb2ORNIASVOSyNS0R0uJrrEo2uoTNTg5/VbWjXRQ4mNp4KgoDaTMg==",
+              "signature": "xTbs2pScagYfryZ0gEy5BVX0PIk1aVHJaFb2ORNIASVOSyNS0R0uJrrEo2uoCEg5/VbWjXRQ4mNp4KgoDaTMg==",
               "account_number": "0",
               "sequence": "0"
             }
@@ -871,14 +871,14 @@
                     "max_rate": "0",
                     "max_change_rate": "0"
                   },
-                  "delegator_address": "tnt1xaef2agzycsww32fqyggnk5xgqxs8780vfv2kh",
+                  "delegator_address": "ce1xaef2agzycsww32fqyggnk5xgqxs8780vfv2kh",
                   "validator_address": "bva1u5mvgkqt9rmj4fut60rnpqfv0a865pwnnewumy",
                   "pubkey": {
                     "type": "tendermint/PubKeyEd25519",
                     "value": "342oxav9s4WVORMIu3HloeCqvcHQzzgxXVDWvpObJgY="
                   },
                   "delegation": {
-                    "denom": "TNT",
+                    "denom": "CE",
                     "amount": "1000000000000"
                   }
                 },
@@ -930,14 +930,14 @@
                     "max_rate": "0",
                     "max_change_rate": "0"
                   },
-                  "delegator_address": "tnt1jstexazk7zateuwzzwllswu4j3dsllu3dgte4m",
+                  "delegator_address": "ce1jstexazk7zateuwzzwllswu4j3dsllu3dgte4m",
                   "validator_address": "bva1aanuahm2c9z5syvwsk4792vddtp74jkmegvpem",
                   "pubkey": {
                     "type": "tendermint/PubKeyEd25519",
                     "value": "tmGe3KQUNISAAoHWmLcMk16RUq1Xsx2FwF8vefZLOfM="
                   },
                   "delegation": {
-                    "denom": "TNT",
+                    "denom": "CE",
                     "amount": "1000000000000"
                   }
                 },

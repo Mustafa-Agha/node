@@ -61,9 +61,9 @@ BEP151Height = 264000000
 
 [addr]
 # Bech32PrefixAccAddr defines the Bech32 prefix of an account's address
-bech32PrefixAccAddr = "tnt"
+bech32PrefixAccAddr = "ce"
 # Bech32PrefixAccPub defines the Bech32 prefix of an account's public key
-bech32PrefixAccPub = "tntp"
+bech32PrefixAccPub = "cep"
 # Bech32PrefixValAddr defines the Bech32 prefix of a validator's operator address
 bech32PrefixValAddr = "bva"
 # Bech32PrefixValPub defines the Bech32 prefix of a validator's operator public key

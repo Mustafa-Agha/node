@@ -12,4 +12,4 @@ while true ; do
     esac
 done;
 
-./tntcli token info -s $symbol | sed 's/bnc//g'
+./cecli token info -s $symbol | sed 's/bnc//g'

@@ -15,8 +15,8 @@ import (
 )
 
 var (
-	// tnt prefix address:  tnt1wxeplyw7x8aahy93w96yhwm7xcq3ke4f8ge93u
-	// ttnt prefix address: ttnt1wxeplyw7x8aahy93w96yhwm7xcq3ke4ffasp3d
+	// ce prefix address:  ce1wxeplyw7x8aahy93w96yhwm7xcq3ke4f8ge93u
+	// tce prefix address: tce1wxeplyw7x8aahy93w96yhwm7xcq3ke4ffasp3d
 	AtomicSwapCoinsAccAddr = sdk.AccAddress(crypto.AddressHash([]byte("BinanceChainAtomicSwapCoins")))
 )
 

@@ -3,9 +3,9 @@
 ########################### SETUP #########################
 home=$HOME
 src="${home}/go/src/github.com/Mustafa-Agha/node"
-deamonhome="${home}/.tntchaind"
-witnesshome="${home}/.tntchaind_witness"
-clihome="${home}/.tntcli"
+deamonhome="${home}/.cechaind"
+witnesshome="${home}/.cechaind_witness"
+clihome="${home}/.cecli"
 chain_id='test-chain-n4b735'
 echo $src
 echo $deamonhome
@@ -13,8 +13,8 @@ echo $witnesshome
 echo $clihome
 
 key_seed_path="${home}"
-executable="${src}/build/tntchaind"
-clipath="${src}/build/tntcli"
+executable="${src}/build/cechaind"
+clipath="${src}/build/cecli"
 cli="${clipath} --home ${clihome}"
 scripthome="${src}/networks/publisher"
 ############################ END ##########################
@@ -31,7 +31,7 @@ sed -i -e "s/26/28/g" ${witnesshome}/config/config.toml
 sed -i -e "s/6060/8060/g" ${witnesshome}/config/config.toml
 
 # get validator id
-validator_pid=$(ps aux | grep "tntchaind start$" | awk '{print $2}')
+validator_pid=$(ps aux | grep "cechaind start$" | awk '{print $2}')
 validatorStatus=$(${cli} status)
 validatorId=$(echo ${validatorStatus} | grep -o "\"id\":\"[a-zA-Z0-9]*\"" | sed "s/\"//g" | sed "s/id://g")
 #echo ${validatorId}

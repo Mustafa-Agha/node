@@ -57,22 +57,22 @@ func TestIsValidTimeInForce(t *testing.T) {
 func TestNewOrderMsg_ValidateBasic(t *testing.T) {
 	assert := assert.New(t)
 	_, acct := testutils.PrivAndAddr()
-	msg := NewNewOrderMsg(acct, "addr-1", 1, "BTC.B_TNT", 355, 100)
+	msg := NewNewOrderMsg(acct, "addr-1", 1, "BTC.B_CE", 355, 100)
 	assert.Nil(msg.ValidateBasic())
-	msg = NewNewOrderMsg(acct, "addr-1", 5, "BTC.B_TNT", 355, 100)
+	msg = NewNewOrderMsg(acct, "addr-1", 5, "BTC.B_CE", 355, 100)
 	assert.Regexp(regexp.MustCompile(".*Invalid side:5.*"), msg.ValidateBasic().Error())
-	msg = NewNewOrderMsg(acct, "addr-1", 2, "BTC.B_TNT", -355, 100)
+	msg = NewNewOrderMsg(acct, "addr-1", 2, "BTC.B_CE", -355, 100)
 	assert.Regexp(regexp.MustCompile(".*Zero/Negative Number.*"), msg.ValidateBasic().Error())
-	msg = NewNewOrderMsg(acct, "addr-1", 2, "BTC.B_TNT", 355, 0)
+	msg = NewNewOrderMsg(acct, "addr-1", 2, "BTC.B_CE", 355, 0)
 	assert.Regexp(regexp.MustCompile(".*Zero/Negative Number.*"), msg.ValidateBasic().Error())
-	msg = NewNewOrderMsg(acct, "addr-1", 2, "BTC.B_TNT", 355, 10)
+	msg = NewNewOrderMsg(acct, "addr-1", 2, "BTC.B_CE", 355, 10)
 	msg.TimeInForce = 5
 	assert.Regexp(regexp.MustCompile(".*Invalid TimeInForce.*"), msg.ValidateBasic().Error())
 }
 
 func TestCancelOrderMsg_ValidateBasic(t *testing.T) {
 	assert := assert.New(t)
-	msg := NewCancelOrderMsg(sdk.AccAddress{}, "XYZ_TNT", "order1")
+	msg := NewCancelOrderMsg(sdk.AccAddress{}, "XYZ_CE", "order1")
 	assert.NotNil(msg.ValidateBasic())
 }
 

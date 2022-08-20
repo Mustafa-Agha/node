@@ -1,4 +1,4 @@
-//nolint
+// nolint
 package main
 
 import (
@@ -111,13 +111,13 @@ var rl = ratelimit.New(1000)
 
 func init() {
 	config := sdk.GetConfig()
-	config.SetBech32PrefixForAccount("ttnt", "tntp")
+	config.SetBech32PrefixForAccount("tce", "cep")
 	config.SetBech32PrefixForValidator("bva", "bvap")
 	config.SetBech32PrefixForConsensusNode("bca", "bcap")
 	config.Seal()
-	home = flag.String("home", "/home/test/.tntcli", "tntcli --home")
-	node = flag.String("node", "0.0.0.0:26657", "tntcli --node")
-	chainId = flag.String("chainId", "chain-tnt", "tntcli --chain-id")
+	home = flag.String("home", "/home/test/.cecli", "cecli --home")
+	node = flag.String("node", "0.0.0.0:26657", "cecli --node")
+	chainId = flag.String("chainId", "chain-ce", "cecli --chain-id")
 	owner = flag.String("owner", "test", "chain's master user")
 	userPrefix = flag.String("userPrefix", "node2_user", "user prefix")
 	votingTime = flag.Int("votingTime", 10, "voting time in sec")
@@ -241,8 +241,8 @@ func execCommand(name string, arg ...string) *bytes.Buffer {
 }
 
 func lookupAccounts() {
-	stdout := execCommand("ttntcli", "--home="+*home, "keys", "list")
-	expr := "(" + *userPrefix + "[\\d]+).+(ttnt.+).+tnt"
+	stdout := execCommand("tcecli", "--home="+*home, "keys", "list")
+	expr := "(" + *userPrefix + "[\\d]+).+(tce.+).+ce"
 	res, err := regexp.Compile(expr)
 	if err != nil {
 		panic(err)
@@ -305,7 +305,7 @@ func generateTokens(sIndex int, eIndex int, flag bool) []string {
 				TxHash   string
 				Response abci.ResponseDeliverTx
 			}
-			issueRep := execCommand("ttntcli", "token", "issue", "--home="+*home, "--node="+*node, "--token-name="+token, "--symbol="+token, "--total-supply=20000000000000000", "--from="+*owner, "--chain-id="+*chainId, "--json=true")
+			issueRep := execCommand("tcecli", "token", "issue", "--home="+*home, "--node="+*node, "--token-name="+token, "--symbol="+token, "--total-supply=20000000000000000", "--from="+*owner, "--chain-id="+*chainId, "--json=true")
 			issueJson := toJSON{}
 			err = MakeCodec().UnmarshalJSON(issueRep.Bytes(), &issueJson)
 			if err != nil {
@@ -326,7 +326,7 @@ func generateTokens(sIndex int, eIndex int, flag bool) []string {
 			}
 			time.Sleep(stime * time.Millisecond)
 			expireTime := strconv.FormatInt(time.Now().Unix()+3600, 10)
-			proposalRep := execCommand("ttntcli", "gov", "submit-list-proposal", "--home="+*home, "--node="+*node, "--chain-id="+*chainId, "--from="+*owner, "--deposit=200000000000:TNT", "--base-asset-symbol="+token, "--quote-asset-symbol=TNT", "--init-price=100000000", "--title="+token+":TNT", "--description="+token+":TNT", "--expire-time="+expireTime, "--json=true")
+			proposalRep := execCommand("tcecli", "gov", "submit-list-proposal", "--home="+*home, "--node="+*node, "--chain-id="+*chainId, "--from="+*owner, "--deposit=200000000000:CE", "--base-asset-symbol="+token, "--quote-asset-symbol=CE", "--init-price=100000000", "--title="+token+":CE", "--description="+token+":CE", "--expire-time="+expireTime, "--json=true")
 			proposalJson := toJSON{}
 			err = MakeCodec().UnmarshalJSON(proposalRep.Bytes(), &proposalJson)
 			if err != nil {
@@ -341,9 +341,9 @@ func generateTokens(sIndex int, eIndex int, flag bool) []string {
 				}
 			}
 			time.Sleep(stime * time.Millisecond)
-			execCommand("ttntcli", "gov", "vote", "--home="+*home, "--node="+*node, "--chain-id="+*chainId, "--from="+*owner, "--proposal-id="+pid, "--option=yes")
+			execCommand("tcecli", "gov", "vote", "--home="+*home, "--node="+*node, "--chain-id="+*chainId, "--from="+*owner, "--proposal-id="+pid, "--option=yes")
 			time.Sleep(time.Duration(*votingTime) * time.Second)
-			execCommand("ttntcli", "dex", "list", "--home="+*home, "--node="+*node, "--base-asset-symbol="+token, "--quote-asset-symbol=TNT", "--init-price=100000000", "--from="+*owner, "--chain-id="+*chainId, "--proposal-id="+pid)
+			execCommand("tcecli", "dex", "list", "--home="+*home, "--node="+*node, "--base-asset-symbol="+token, "--quote-asset-symbol=CE", "--init-price=100000000", "--from="+*owner, "--chain-id="+*chainId, "--proposal-id="+pid)
 			time.Sleep(stime * time.Millisecond)
 			tokens = append(tokens, token)
 			sIndex++
@@ -353,7 +353,7 @@ func generateTokens(sIndex int, eIndex int, flag bool) []string {
 }
 
 func initializeAccounts(tokens []string, flag bool) []string {
-	tokens = append(tokens, "TNT")
+	tokens = append(tokens, "CE")
 	if flag == true {
 		type Transfer struct {
 			To     string `json:"to"`
@@ -390,7 +390,7 @@ func initializeAccounts(tokens []string, flag bool) []string {
 				writer := bufio.NewWriter(file)
 				writer.Write(bytes)
 				writer.Flush()
-				execCommand("ttntcli", "token", "multi-send", "--home="+*home, "--node="+*node, "--chain-id="+*chainId, "--from="+*owner, "--transfers-file", path)
+				execCommand("tcecli", "token", "multi-send", "--home="+*home, "--node="+*node, "--chain-id="+*chainId, "--from="+*owner, "--transfers-file", path)
 				time.Sleep(stime * time.Millisecond)
 			}
 		}
@@ -445,7 +445,7 @@ func allocateCreate(tokens []string) {
 	nameIndex := 0
 	for i := 0; i < *batchSize; i++ {
 		for j := 0; j < len(tokens); j++ {
-			symbol := fmt.Sprintf("%s_TNT", tokens[j])
+			symbol := fmt.Sprintf("%s_CE", tokens[j])
 			fmt.Printf("allocating #%d\n", createIndex)
 			if largeBuyers != nil && isLargeBuyer(nameIndex, largeBuyers) {
 				createChn <- buildC(sortKeys[nameIndex], buy, symbol, 9990000, 10000000000, "GTE")

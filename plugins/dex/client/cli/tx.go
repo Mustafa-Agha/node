@@ -100,7 +100,7 @@ func newOrderCmd(cdc *wire.Codec) *cobra.Command {
 			return nil
 		},
 	}
-	cmd.Flags().StringP(flagSymbol, "l", "", "the listed trading pair, such as ADA_TNT")
+	cmd.Flags().StringP(flagSymbol, "l", "", "the listed trading pair, such as ADA_CE")
 	cmd.Flags().StringP(flagSide, "s", "", "side (buy as 1 or sell as 2) of the order")
 	cmd.Flags().StringP(flagPrice, "p", "", "price for the order")
 	cmd.Flags().StringP(flagQty, "q", "", "quantity for the order")
@@ -141,7 +141,7 @@ func showOrderBookCmd(cdc *wire.Codec) *cobra.Command {
 	}
 
 	cmd.Flags().IntP(flagLevels, "L", 100, "maximum level (1,5,10,20,50,100,500,1000) to return")
-	cmd.Flags().StringP(flagSymbol, "l", "", "the listed trading pair, such as ADA_TNT")
+	cmd.Flags().StringP(flagSymbol, "l", "", "the listed trading pair, such as ADA_CE")
 	return cmd
 }
 
@@ -178,7 +178,7 @@ func cancelOrderCmd(cdc *wire.Codec) *cobra.Command {
 			return nil
 		},
 	}
-	cmd.Flags().StringP(flagSymbol, "l", "", "the listed trading pair, such as ADA_TNT")
+	cmd.Flags().StringP(flagSymbol, "l", "", "the listed trading pair, such as ADA_CE")
 	cmd.Flags().StringP(flagRefId, "f", "", "id string of the order")
 	return cmd
 }

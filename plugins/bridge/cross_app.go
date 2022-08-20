@@ -613,7 +613,7 @@ func (app *MirrorApp) ExecuteSynPackage(ctx sdk.Context, payload []byte, relayer
 }
 
 func (app *MirrorApp) generateAckPackage(code uint8, symbol string, synPackage *types.MirrorSynPackage) ([]byte, sdk.Error) {
-	bscMirrorFee, sdkErr := types.ConvertBCAmountToBSCAmount(types.BSCTNTDecimals, synPackage.MirrorFee.Int64())
+	bscMirrorFee, sdkErr := types.ConvertBCAmountToBSCAmount(types.BSCCEDecimals, synPackage.MirrorFee.Int64())
 	if sdkErr != nil {
 		return nil, sdkErr
 	}
@@ -808,7 +808,7 @@ func (app *MirrorSyncApp) ExecuteSynPackage(ctx sdk.Context, payload []byte, rel
 }
 
 func (app *MirrorSyncApp) generateAckPackage(code uint8, synPackage *types.MirrorSyncSynPackage) ([]byte, sdk.Error) {
-	bscSyncFee, sdkErr := types.ConvertBCAmountToBSCAmount(types.BSCTNTDecimals, synPackage.SyncFee.Int64())
+	bscSyncFee, sdkErr := types.ConvertBCAmountToBSCAmount(types.BSCCEDecimals, synPackage.SyncFee.Int64())
 	if sdkErr != nil {
 		return nil, sdkErr
 	}

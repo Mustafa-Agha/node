@@ -31,13 +31,13 @@ func timeLockCmd(cmdr Commander) *cobra.Command {
 		Long: strings.TrimSpace(`
 Time lock is to lock an amount of tokens to a given time before when these tokens will not be able to claim back.
 
-$ CLI token time-lock --amount 100:TNT --from alice --description "time lock for some reason" --lock-time 1559805558
+$ CLI token time-lock --amount 100:CE --from alice --description "time lock for some reason" --lock-time 1559805558
 
 this command will output the tx to broadcast, but will not broadcast to any node. you can double check the tx msg before send it to blockchain.
 
 if you want to broadcast the tx to blockchain, you need to specify --broadcast manually.
 
-$ CLI token time-lock --amount 100:TNT --from alice --description "time lock for some reason" --lock-time 1559805558 --broadcast
+$ CLI token time-lock --amount 100:CE --from alice --description "time lock for some reason" --lock-time 1559805558 --broadcast
 `),
 		RunE: cmdr.timeLock,
 	}
@@ -96,7 +96,7 @@ func timeRelockCmd(cmdr Commander) *cobra.Command {
 		Long: strings.TrimSpace(`
 Time relock is used to extend the lock time, increase amount of locked tokens or modify the description of a given time lock record.
 
-$ CLI token time-lock --from alice --description "time lock for some reason" --extended-lock-time 1559805558 --increase-amount-to 1000:TNT --time-lock-id 1
+$ CLI token time-lock --from alice --description "time lock for some reason" --extended-lock-time 1559805558 --increase-amount-to 1000:CE --time-lock-id 1
 
 this command will output the tx to broadcast, but will not broadcast to any node. you can double check the tx msg before send it to blockchain.
 
@@ -110,7 +110,7 @@ this command will just extend the lock time of this time lock record.
 
 if you want to broadcast the tx to blockchain, you need to specify --broadcast manually.
 
-$ CLI token time-lock --from alice --description "time lock for some reason" --extended-lock-time 1559805558 --increase-amount-to 1000:TNT --time-lock-id 1 --broadcast
+$ CLI token time-lock --from alice --description "time lock for some reason" --extended-lock-time 1559805558 --increase-amount-to 1000:CE --time-lock-id 1 --broadcast
 `),
 		RunE: cmdr.timeRelock,
 	}

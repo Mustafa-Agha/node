@@ -24,7 +24,7 @@ func TestTimeLockMsg(t *testing.T) {
 			from:        addrs[0],
 			description: "",
 			amount: sdk.Coins{
-				sdk.NewCoin("TNT", 2000e8),
+				sdk.NewCoin("CE", 2000e8),
 			},
 			lockTime:  1000,
 			pass:      false,
@@ -34,7 +34,7 @@ func TestTimeLockMsg(t *testing.T) {
 			from:        addrs[0],
 			description: strings.Repeat("d", 129),
 			amount: sdk.Coins{
-				sdk.NewCoin("TNT", 2000e8),
+				sdk.NewCoin("CE", 2000e8),
 			},
 			lockTime:  1000,
 			pass:      false,
@@ -44,7 +44,7 @@ func TestTimeLockMsg(t *testing.T) {
 			from:        addrs[0],
 			description: strings.Repeat("d", 120),
 			amount: sdk.Coins{
-				sdk.NewCoin("TNT", 2000e8),
+				sdk.NewCoin("CE", 2000e8),
 			},
 			lockTime:  -1,
 			pass:      false,
@@ -55,7 +55,7 @@ func TestTimeLockMsg(t *testing.T) {
 			description: strings.Repeat("d", 120),
 			amount: sdk.Coins{
 				sdk.NewCoin("ANB", -2000e8),
-				sdk.NewCoin("TNT", 2000e8),
+				sdk.NewCoin("CE", 2000e8),
 			},
 			lockTime:  1000,
 			pass:      false,
@@ -66,7 +66,7 @@ func TestTimeLockMsg(t *testing.T) {
 			description: strings.Repeat("d", 120),
 			amount: sdk.Coins{
 				sdk.NewCoin("ANB", 2000e8),
-				sdk.NewCoin("TNT", 2000e8),
+				sdk.NewCoin("CE", 2000e8),
 			},
 			lockTime:  1000,
 			pass:      true,
@@ -77,7 +77,7 @@ func TestTimeLockMsg(t *testing.T) {
 			description: strings.Repeat("d", 120),
 			amount: sdk.Coins{
 				sdk.NewCoin("ANB", 2000e8),
-				sdk.NewCoin("TNT", 2000e8),
+				sdk.NewCoin("CE", 2000e8),
 			},
 			lockTime:  MaxLockTime,
 			pass:      false,
@@ -119,7 +119,7 @@ func TestTimeRelockMsg(t *testing.T) {
 			id:          0,
 			description: "desription",
 			amount: sdk.Coins{
-				sdk.NewCoin("TNT", 2000e8),
+				sdk.NewCoin("CE", 2000e8),
 			},
 			lockTime:  1000,
 			pass:      false,
@@ -130,7 +130,7 @@ func TestTimeRelockMsg(t *testing.T) {
 			id:          1,
 			description: strings.Repeat("d", 129),
 			amount: sdk.Coins{
-				sdk.NewCoin("TNT", 2000e8),
+				sdk.NewCoin("CE", 2000e8),
 			},
 			lockTime:  1000,
 			pass:      false,
@@ -141,7 +141,7 @@ func TestTimeRelockMsg(t *testing.T) {
 			id:          1,
 			description: strings.Repeat("d", 120),
 			amount: sdk.Coins{
-				sdk.NewCoin("TNT", 2000e8),
+				sdk.NewCoin("CE", 2000e8),
 			},
 			lockTime:  -1,
 			pass:      false,
@@ -153,7 +153,7 @@ func TestTimeRelockMsg(t *testing.T) {
 			description: strings.Repeat("d", 120),
 			amount: sdk.Coins{
 				sdk.NewCoin("ANB", -2000e8),
-				sdk.NewCoin("TNT", 2000e8),
+				sdk.NewCoin("CE", 2000e8),
 			},
 			lockTime:  1000,
 			pass:      false,
@@ -174,7 +174,7 @@ func TestTimeRelockMsg(t *testing.T) {
 			description: strings.Repeat("d", 120),
 			amount: sdk.Coins{
 				sdk.NewCoin("ANB", 2000e8),
-				sdk.NewCoin("TNT", 2000e8),
+				sdk.NewCoin("CE", 2000e8),
 			},
 			lockTime:  1000,
 			pass:      true,
@@ -186,7 +186,7 @@ func TestTimeRelockMsg(t *testing.T) {
 			description: "",
 			amount: sdk.Coins{
 				sdk.NewCoin("ANB", 2000e8),
-				sdk.NewCoin("TNT", 2000e8),
+				sdk.NewCoin("CE", 2000e8),
 			},
 			lockTime:  1000,
 			pass:      true,
@@ -198,7 +198,7 @@ func TestTimeRelockMsg(t *testing.T) {
 			description: "",
 			amount: sdk.Coins{
 				sdk.NewCoin("ANB", 2000e8),
-				sdk.NewCoin("TNT", 2000e8),
+				sdk.NewCoin("CE", 2000e8),
 			},
 			lockTime:  MaxLockTime,
 			pass:      false,

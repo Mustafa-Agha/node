@@ -25,8 +25,8 @@ func setup() (sdk.Context, sdk.Handler, sdk.Handler, auth.AccountKeeper, store.M
 	ms, capKey1, capKey2 := testutils.SetupMultiStoreForUnitTest()
 	cdc := wire.NewCodec()
 	cdc.RegisterInterface((*types.IToken)(nil), nil)
-	cdc.RegisterConcrete(&types.Token{}, "tntchain/Token", nil)
-	cdc.RegisterConcrete(&types.MiniToken{}, "tntchain/MiniToken", nil)
+	cdc.RegisterConcrete(&types.Token{}, "cechain/Token", nil)
+	cdc.RegisterConcrete(&types.MiniToken{}, "cechain/MiniToken", nil)
 	tokenMapper := store.NewMapper(cdc, capKey1)
 	accountKeeper := auth.NewAccountKeeper(cdc, capKey2, types.ProtoAppAccount)
 	bankKeeper := bank.NewBaseKeeper(accountKeeper)
@@ -57,13 +57,13 @@ func TestHandleBurnMini(t *testing.T) {
 	_, acc := testutils.NewAccount(ctx, accountKeeper, 100e8)
 
 	ctx = ctx.WithValue(baseapp.TxHashKey, "000")
-	msg := issue.NewIssueMiniMsg(acc.GetAddress(), "New TNT", "NNB", 10000e8, false, "http://www.xyz.com/nnb.json")
+	msg := issue.NewIssueMiniMsg(acc.GetAddress(), "New CE", "NNB", 10000e8, false, "http://www.xyz.com/nnb.json")
 	sdkResult := miniIssueHandler(ctx, msg)
 	require.Equal(t, true, sdkResult.Code.IsOK())
 
 	token, err := tokenMapper.GetToken(ctx, "NNB-000M")
 	require.NoError(t, err)
-	expectedToken := types.NewMiniToken("New TNT", "NNB", "NNB-000M", 2, 10000e8, acc.GetAddress(), false, "http://www.xyz.com/nnb.json")
+	expectedToken := types.NewMiniToken("New CE", "NNB", "NNB-000M", 2, 10000e8, acc.GetAddress(), false, "http://www.xyz.com/nnb.json")
 	require.Equal(t, expectedToken, token)
 
 	ctx = ctx.WithValue(baseapp.TxHashKey, "002")
@@ -79,7 +79,7 @@ func TestHandleBurnMini(t *testing.T) {
 
 	token, err = tokenMapper.GetToken(ctx, "NNB-000M")
 	require.NoError(t, err)
-	expectedToken = types.NewMiniToken("New TNT", "NNB", "NNB-000M", 2, 1e8-1, acc.GetAddress(), false, "http://www.xyz.com/nnb.json")
+	expectedToken = types.NewMiniToken("New CE", "NNB", "NNB-000M", 2, 1e8-1, acc.GetAddress(), false, "http://www.xyz.com/nnb.json")
 	require.Equal(t, expectedToken, token)
 
 	account := accountKeeper.GetAccount(ctx, msg.From).(types.NamedAccount)
@@ -98,7 +98,7 @@ func TestHandleBurnMini(t *testing.T) {
 
 	token, err = tokenMapper.GetToken(ctx, "NNB-000M")
 	require.NoError(t, err)
-	expectedToken = types.NewMiniToken("New TNT", "NNB", "NNB-000M", 2, 0, acc.GetAddress(), false, "http://www.xyz.com/nnb.json")
+	expectedToken = types.NewMiniToken("New CE", "NNB", "NNB-000M", 2, 0, acc.GetAddress(), false, "http://www.xyz.com/nnb.json")
 	require.Equal(t, expectedToken, token)
 
 	_, acc2 := testutils.NewAccount(ctx, accountKeeper, 100e8)
@@ -120,7 +120,7 @@ func TestHandleBurn(t *testing.T) {
 	_, acc := testutils.NewAccount(ctx, accountKeeper, 100e8)
 
 	ctx = ctx.WithValue(baseapp.TxHashKey, "000")
-	msg := issue.NewIssueMsg(acc.GetAddress(), "New TNT", "NNB", 10000e8, false)
+	msg := issue.NewIssueMsg(acc.GetAddress(), "New CE", "NNB", 10000e8, false)
 	sdkResult := issueHandler(ctx, msg)
 	require.Equal(t, true, sdkResult.Code.IsOK())
 
@@ -144,7 +144,7 @@ func TestHandleBurn(t *testing.T) {
 
 	token, err = tokenMapper.GetToken(ctx, "NNB-000")
 	require.NoError(t, err)
-	expectedToken, err := types.NewToken("New TNT", "NNB-000", 1e8-1, acc.GetAddress(), false)
+	expectedToken, err := types.NewToken("New CE", "NNB-000", 1e8-1, acc.GetAddress(), false)
 	require.Equal(t, expectedToken, token)
 
 	account := accountKeeper.GetAccount(ctx, msg.From).(types.NamedAccount)

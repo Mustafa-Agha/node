@@ -1,15 +1,15 @@
-TNT Beacon Chain
+CE Beacon Chain
 ------------
 
-TNT Beacon Chain is a blockchain with a flexible set of native assets and pluggable modules. It uses [tendermint](https://tendermint.com) for consensus and app logic is written in golang. It targets fast block times, a native dApp layer and multi-token support with no smart contract VM.
+CE Beacon Chain is a blockchain with a flexible set of native assets and pluggable modules. It uses [tendermint](https://tendermint.com) for consensus and app logic is written in golang. It targets fast block times, a native dApp layer and multi-token support with no smart contract VM.
 
 [![Reference](
 https://camo.githubusercontent.com/915b7be44ada53c290eb157634330494ebe3e30a/68747470733a2f2f676f646f632e6f72672f6769746875622e636f6d2f676f6c616e672f6764646f3f7374617475732e737667
-)](https://docs.tntchain.world/docs/learn/beaconIntro)
+)](https://docs.cechain.world/docs/learn/beaconIntro)
 [![Discord](https://img.shields.io/badge/discord-join%20chat-blue.svg)](https://discord.gg/z2VpC455eU)
 
 Beacon Chain has the basic features of most blockchains:
-- Sending and receiving TNT and digital assets
+- Sending and receiving CE and digital assets
 - Issuing new digital assets (we have a standard called BEP-2)
 - Mint/burn, freeze/unfreeze, lock/unlock of digital assets
 
@@ -41,29 +41,29 @@ If you do not have golang yet, please [install it](https://golang.org/dl) or use
 ```bash
 $ export GOPATH=~/go
 $ export PATH=~/go/bin:$PATH
-$ export TNTCHAINPATH=~/go/src/github.com/Mustafa-Agha/node
-$ mkdir -p $TNTCHAINPATH
-$ git clone git@github.com:tnt-chain/node.git $TNTCHAINPATH
-$ cd $TNTCHAINPATH
+$ export CECHAINPATH=~/go/src/github.com/Mustafa-Agha/node
+$ mkdir -p $CECHAINPATH
+$ git clone git@github.com:ce-chain/node.git $CECHAINPATH
+$ cd $CECHAINPATH
 $ make build
 ```
 
 **Windows**
 
 If you are working on windows, `GOPATH` and `PATH` should already be set when you install golang.
-You may need add TNTCHAINPATH to the environment variables.
+You may need add CECHAINPATH to the environment variables.
 
 ```bat
-> md %TNTCHAINPATH%
-> git clone git@github.com:tnt-chain/node.git %TNTCHAINPATH%
-> cd %TNTCHAINPATH%
+> md %CECHAINPATH%
+> git clone git@github.com:ce-chain/node.git %CECHAINPATH%
+> cd %CECHAINPATH%
 > make build
 ```
 
 To test that installation worked, try to run the cli tool:
 
 ```bash
-$ tntcli
+$ cecli
 ```
 
 ### Start the blockchain
@@ -71,14 +71,14 @@ $ tntcli
 This command will generate a keypair for your node and create the genesis block config:
 
 ```bash
-$ tntchaind init
-$ cat ~/.tntchaind/config/genesis.json
+$ cechaind init
+$ cat ~/.cechaind/config/genesis.json
 ```
 
 You may want to check the [Issuing assets](#issuing-assets) section below before you start, but this is how to start the node and begin generating blocks:
 
 ```bash
-$ tntchaind start --moniker ${YOURNAME}
+$ cechaind start --moniker ${YOURNAME}
 ```
 
 If everything worked you will see blocks being generated around every 1s in your console.
@@ -88,21 +88,21 @@ If everything worked you will see blocks being generated around every 1s in your
 When you make a change you probably want to reset your chain, remember to kill the node first.
 
 ```bash
-$ tntchaind unsafe_reset_all
+$ cechaind unsafe_reset_all
 ```
 
 ### Join mainnet/testnet
 
-Please refer to the document for joining [mainnet](https://docs.tntchain.world/docs/beaconchain/develop/node/join-mainnet) or [testnnet](https://docs.tntchain.world/docs/beaconchain/develop/node/join-testnet).
+Please refer to the document for joining [mainnet](https://docs.cechain.world/docs/beaconchain/develop/node/join-mainnet) or [testnnet](https://docs.cechain.world/docs/beaconchain/develop/node/join-testnet).
 
 ## Assets
 
 ### Issuing assets
 
-Assets may be issued through `tntcli` while the blockchain is running; see here for an example:
+Assets may be issued through `cecli` while the blockchain is running; see here for an example:
 
 ```bash
-$ tntcli tokens issue tnt -n tnt -s 100000
+$ cecli tokens issue ce -n ce -s 100000
 ```
 
 This will post a transaction with an `IssueMsg` to the blockchain, which contains the data needed for token issuance.
@@ -112,7 +112,7 @@ This will post a transaction with an `IssueMsg` to the blockchain, which contain
 Start your node, then list your keys as below:
 
 ```bash
-$ tntcli keys list
+$ cecli keys list
 All keys:
 pepe    B71E119324558ABA3AE3F5BC854F1225132465A0
 you     DEBF30B59A5CD0111FDF4F86664BC063BF450A1A
@@ -121,10 +121,10 @@ you     DEBF30B59A5CD0111FDF4F86664BC063BF450A1A
 Check a balance with this command, e.g.:
 
 ```bash
-$ tntcli account DEBF30B59A5CD0111FDF4F86664BC063BF450A1A
+$ cecli account DEBF30B59A5CD0111FDF4F86664BC063BF450A1A
 ```
 
-Alternatively through http when `tntcli api-server` is running. Amounts are returned as decimal numbers in strings.
+Alternatively through http when `cecli api-server` is running. Amounts are returned as decimal numbers in strings.
 
 ```bash
 $ curl -s http://localhost:8080/balances/cosmosaccaddr173hyu6dtfkrj9vujjhvz2ayehrng64rxq3h4yp | json_pp
@@ -132,7 +132,7 @@ $ curl -s http://localhost:8080/balances/cosmosaccaddr173hyu6dtfkrj9vujjhvz2ayeh
    "address" : "cosmosaccaddr173hyu6dtfkrj9vujjhvz2ayehrng64rxq3h4yp",
    "balances" : [
       {
-         "symbol" : "TNT",
+         "symbol" : "CE",
          "free" : "2.00000000",
          "locked" : "0.00000000",
          "frozen" : "0.00000000"
@@ -154,7 +154,7 @@ You have to send a transaction to send assets to another address, which is possi
 Make sure `chain-id` is set correctly; you can find it in your `genesis.json`.
 
 ```bash
-$ tntcli send --chain-id=$CHAIN_ID --name=you --amount=1000mycoin --to=B71E119324558ABA3AE3F5BC854F1225132465A0 --sequence=0
+$ cecli send --chain-id=$CHAIN_ID --name=you --amount=1000mycoin --to=B71E119324558ABA3AE3F5BC854F1225132465A0 --sequence=0
 Password to sign with 'you': xxx
 Committed at block 88. Hash: 492B08FFE364D389BB508FD3507BBACD3DB58A98
 ```
@@ -162,13 +162,13 @@ Committed at block 88. Hash: 492B08FFE364D389BB508FD3507BBACD3DB58A98
 You can look at the contents of the tx, use the tx hash above:
 
 ```bash
-$ tntcli tx 492B08FFE364D389BB508FD3507BBACD3DB58A98
+$ cecli tx 492B08FFE364D389BB508FD3507BBACD3DB58A98
 ```
 
 Then you can check the balance of pepe's key to see that he now has 1000 satoshi units of `mycoin`:
 
 ```bash
-$ tntcli account B71E119324558ABA3AE3F5BC854F1225132465A0
+$ cecli account B71E119324558ABA3AE3F5BC854F1225132465A0
 {
   "type": "16542275FBFAB8",
   "value": {
@@ -194,19 +194,19 @@ Amounts are represented as ints, and all coins have a fixed scale of 8. This mea
 ### Placing an order
 
 ```bash
-$ tntcli dex order -i uniqueid1 -l XYZ_TNT -s 1 -p 100000000 -q 100000000 --from me --chain-id=$CHAIN_ID -t 1
+$ cecli dex order -i uniqueid1 -l XYZ_CE -s 1 -p 100000000 -q 100000000 --from me --chain-id=$CHAIN_ID -t 1
 ```
 
 ### Viewing the order book
 
 ```bash
-$ tntcli dex show -l XYZ_TNT
+$ cecli dex show -l XYZ_CE
 ```
 
-Alternatively through http when `tntcli api-server` is running. Prices and quantities are returned as decimal numbers in strings.
+Alternatively through http when `cecli api-server` is running. Prices and quantities are returned as decimal numbers in strings.
 
 ```bash
-$ curl -s http://localhost:8080/api/v1/depth?symbol=XYZ_TNT&limit=5 | json_pp
+$ curl -s http://localhost:8080/api/v1/depth?symbol=XYZ_CE&limit=5 | json_pp
 {"asks":[["0.00000000","0.00000000"],["0.00000000","0.00000000"],["0.00000000","0.00000000"],["0.00000000","0.00000000"],["0.00000000","0.00000000"]],"bids":[["0.10000000","1.00000000"],["0.00000000","0.00000000"],["0.00000000","0.00000000"],["0.00000000","0.00000000"],["0.00000000","0.00000000"]]}
 ```
 

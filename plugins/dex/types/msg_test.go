@@ -37,14 +37,14 @@ func TestWrongQuoteAssetSymbol(t *testing.T) {
 }
 
 func TestWrongInitPrice(t *testing.T) {
-	msg := NewListMsg(sdk.AccAddress{}, 1, "BTC-000", "TNT", -1000)
+	msg := NewListMsg(sdk.AccAddress{}, 1, "BTC-000", "CE", -1000)
 	err := msg.ValidateBasic()
 	require.NotNil(t, err, "msg should be error")
 	require.Contains(t, err.Error(), "price should be positive")
 }
 
 func TestRightMsg(t *testing.T) {
-	msg := NewListMsg(sdk.AccAddress{}, 1, "BTC-000", "TNT", 1000)
+	msg := NewListMsg(sdk.AccAddress{}, 1, "BTC-000", "CE", 1000)
 	err := msg.ValidateBasic()
 	require.Nil(t, err, "msg should not be error")
 }

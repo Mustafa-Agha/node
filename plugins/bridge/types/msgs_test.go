@@ -25,22 +25,22 @@ func TestBindMsg(t *testing.T) {
 		expectedPass bool
 	}{
 		{
-			NewBindMsg(addrs[0], "TNT", 1, nonEmptySmartChainAddr, 1, 100),
+			NewBindMsg(addrs[0], "CE", 1, nonEmptySmartChainAddr, 1, 100),
 			true,
 		}, {
 			NewBindMsg(addrs[0], "", 1, nonEmptySmartChainAddr, 1, 100),
 			false,
 		}, {
-			NewBindMsg(addrs[0], "TNT", -1, nonEmptySmartChainAddr, 1, 100),
+			NewBindMsg(addrs[0], "CE", -1, nonEmptySmartChainAddr, 1, 100),
 			false,
 		}, {
-			NewBindMsg(sdk.AccAddress{0, 1}, "TNT", 1, nonEmptySmartChainAddr, 1, 100),
+			NewBindMsg(sdk.AccAddress{0, 1}, "CE", 1, nonEmptySmartChainAddr, 1, 100),
 			false,
 		}, {
-			NewBindMsg(addrs[0], "TNT", 1, emptySmartChainAddr, 1, 100),
+			NewBindMsg(addrs[0], "CE", 1, emptySmartChainAddr, 1, 100),
 			false,
 		}, {
-			NewBindMsg(addrs[0], "TNT", 1, nonEmptySmartChainAddr, -1, 100),
+			NewBindMsg(addrs[0], "CE", 1, nonEmptySmartChainAddr, -1, 100),
 			false,
 		},
 	}
@@ -62,13 +62,13 @@ func TestUnbindMsg(t *testing.T) {
 		expectedPass bool
 	}{
 		{
-			NewUnbindMsg(addrs[0], "TNT"),
+			NewUnbindMsg(addrs[0], "CE"),
 			true,
 		}, {
 			NewUnbindMsg(addrs[0], ""),
 			false,
 		}, {
-			NewUnbindMsg(sdk.AccAddress{0, 1}, "TNT"),
+			NewUnbindMsg(sdk.AccAddress{0, 1}, "CE"),
 			false,
 		},
 	}

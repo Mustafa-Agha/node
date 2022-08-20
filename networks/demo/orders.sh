@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ./orders.sh --list-pair BTC_TNT --side 1 --price 1 --quantity 100 --from alice --tif 1
+# ./orders.sh --list-pair BTC_CE --side 1 --price 1 --quantity 100 --from alice --tif 1
 
 chain_id=$CHAIN_ID
 id="$(cat /proc/sys/kernel/random/uuid)"

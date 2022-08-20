@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ./show.sh -l ADA_TNT --from alice
+# ./show.sh -l ADA_CE --from alice
 
 chain_id=$CHAIN_ID
 
@@ -16,4 +16,4 @@ while true ; do
     esac
 done;
 
-./tntcli dex show -l $pair
+./cecli dex show -l $pair

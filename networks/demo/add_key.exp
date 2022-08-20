@@ -4,7 +4,7 @@ set secret [lindex $argv 0]
 set name [lindex $argv 1]
 
 set timeout 30
-	spawn ./tntcli keys add --home ./testnodecli $name
+	spawn ./cecli keys add --home ./testnodecli $name
 	expect "Enter*"
 	send "12345678\r"
 	expect "Repeat*"

@@ -27,7 +27,7 @@ func init() {
 	types.RegisterWire(codec)
 
 	config := sdk.GetConfig()
-	config.SetBech32PrefixForAccount("ttnt", "tntp")
+	config.SetBech32PrefixForAccount("tce", "cep")
 }
 
 func openDB(root, dbName string) *db.GoLevelDB {

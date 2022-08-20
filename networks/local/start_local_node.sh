@@ -6,7 +6,7 @@ REPO="$ORG/BnbChain"
 
 cli_home="./testnodecli"
 home="./testnoded"
-chain_id="tntchain-1000"
+chain_id="cechain-1000"
 
 function cleanup() {
 	rm -rf ${cli_home}
@@ -22,21 +22,21 @@ function prepare_node() {
 
 	cp -f ../networks/demo/*.exp .
 
-	alice_secret=$(./tntchaind init --moniker testnode --home ${home} --home-client ${cli_home} --chain-id ${chain_id} | grep secret | grep -o ":.*" | grep -o "\".*"  | sed "s/\"//g")
+	alice_secret=$(./cechaind init --moniker testnode --home ${home} --home-client ${cli_home} --chain-id ${chain_id} | grep secret | grep -o ":.*" | grep -o "\".*"  | sed "s/\"//g")
 
 	$(cd "${home}/config" && sed -i -e "s/skip_timeout_commit = false/skip_timeout_commit = true/g" config.toml)
 
 	# stop a previously running node
-	ps -ef  | grep tntc | grep testnoded | awk '{print $2}' | xargs kill
+	ps -ef  | grep cec | grep testnoded | awk '{print $2}' | xargs kill
 
-	./tntchaind start --home ${home}  > ./testnoded/node.log 2>&1 &
+	./cechaind start --home ${home}  > ./testnoded/node.log 2>&1 &
 
 	echo ${alice_secret}
 }
 
 # stop_node stops the chain node and the api-server
 function stop_node() {
-	ps -ef | grep tntc | grep testnode | awk '{print $2}' | xargs kill
+	ps -ef | grep cec | grep testnode | awk '{print $2}' | xargs kill
 }
 
 # initial checks
@@ -60,7 +60,7 @@ fi
 
 # build the chain
 
-echo "Building tntchaind and tntcli, please wait..."
+echo "Building cechaind and cecli, please wait..."
 cd $GOPATH/src/github.com/$REPO && make get_vendor_deps && make build
 
 cd $GOPATH/src/github.com/$REPO/build
@@ -78,8 +78,8 @@ result=$(expect ./recover.exp "${alice_secret}" "alice" true)
 bob_secret="bottom quick strong ranch section decide pepper broken oven demand coin run jacket curious business achieve mule bamboo remain vote kid rigid bench rubber"
 result=$(expect ./add_key.exp "${bob_secret}" "bob")
 
-alice_addr=$(./tntcli keys list --home ${cli_home} | grep alice | grep -o "bnc[0-9a-zA-Z]*")
-bob_addr=$(./tntcli keys list --home ${cli_home} | grep bob | grep -o "bnc[0-9a-zA-Z]*")
+alice_addr=$(./cecli keys list --home ${cli_home} | grep alice | grep -o "bnc[0-9a-zA-Z]*")
+bob_addr=$(./cecli keys list --home ${cli_home} | grep bob | grep -o "bnc[0-9a-zA-Z]*")
 
 # wait for the chain
 
@@ -87,9 +87,9 @@ sleep 15s
 
 # issue and list an NNB test token
 
-expect ./send.exp ${cli_home} alice ${chain_id} "100000000000000:TNT" ${bob_addr}
+expect ./send.exp ${cli_home} alice ${chain_id} "100000000000000:CE" ${bob_addr}
 if [ $? -ne 0 ]; then
-	echo "There was an error sending TNT to Bob!"
+	echo "There was an error sending CE to Bob!"
 	exit 1
 fi
 
@@ -100,14 +100,14 @@ if [ $? -ne 0 ]; then
 fi
 sleep 1s
 
-expect ./list.exp NNB TNT 100000000 bob ${chain_id} ${cli_home}
+expect ./list.exp NNB CE 100000000 bob ${chain_id} ${cli_home}
 if [ $? -ne 0 ]; then
 	echo "There was an error listing the NNB token!"
 	exit 1
 fi
 
 # delay starting the api-server to avoid cli problem for using shared cli_home when using recover, send and issue commands
-./tntcli api-server --home ${cli_home}  > ./testnoded/api-server.log 2>&1 &
+./cecli api-server --home ${cli_home}  > ./testnoded/api-server.log 2>&1 &
 
 # export a function to kill the node, as well as alice and bob's keys and secrets
 

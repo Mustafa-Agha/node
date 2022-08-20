@@ -23,14 +23,14 @@ func TestMiniWrongBaseAssetSymbolNotMiniToken(t *testing.T) {
 }
 
 func TestMiniWrongInitPrice(t *testing.T) {
-	msg := NewListMiniMsg(sdk.AccAddress{}, "BTC-000M", "TNT", -1000)
+	msg := NewListMiniMsg(sdk.AccAddress{}, "BTC-000M", "CE", -1000)
 	err := msg.ValidateBasic()
 	require.NotNil(t, err, "msg should be error")
 	require.Contains(t, err.Error(), "price should be positive")
 }
 
 func TestMiniRightMsg(t *testing.T) {
-	msg := NewListMiniMsg(sdk.AccAddress{}, "BTC-000M", "TNT", 1000)
+	msg := NewListMiniMsg(sdk.AccAddress{}, "BTC-000M", "CE", 1000)
 	err := msg.ValidateBasic()
 	require.Nil(t, err, "msg should not be error")
 }

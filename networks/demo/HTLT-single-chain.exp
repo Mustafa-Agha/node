@@ -10,9 +10,9 @@ set home [lindex $argv 6]
 
 set timeout 30
 	if {"${home}" == ""} {
-		spawn ./tntcli token HTLT --from $from --chain-id $chain_id --auto --height-span $heightSpan --amount $amount --expected-income $expectedIncome --recipient-addr $recipientAddr
+		spawn ./cecli token HTLT --from $from --chain-id $chain_id --auto --height-span $heightSpan --amount $amount --expected-income $expectedIncome --recipient-addr $recipientAddr
 	} else {
-		spawn ./tntcli token HTLT --home $home --from $from --chain-id $chain_id --height-span $heightSpan --amount $amount --expected-income $expectedIncome --recipient-addr $recipientAddr
+		spawn ./cecli token HTLT --home $home --from $from --chain-id $chain_id --height-span $heightSpan --amount $amount --expected-income $expectedIncome --recipient-addr $recipientAddr
 	}
 	expect "Password*"
 	send "12345678\r"

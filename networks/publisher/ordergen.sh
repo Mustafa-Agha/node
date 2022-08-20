@@ -3,8 +3,8 @@
 ########################### SETUP #########################
 home=$HOME
 src="${home}/go/src/github.com/Mustafa-Agha/node"
-clipath="${home}/go/src/github.com/Mustafa-Agha/node/build/tntcli"
-clihome="${home}/.tntcli"
+clipath="${home}/go/src/github.com/Mustafa-Agha/node/build/cecli"
+clihome="${home}/.cecli"
 chainId='test-chain-n4b735' # should be same with publisher/setup.sh or testnet/deploy.sh
 
 
@@ -44,15 +44,15 @@ do
     pause=$(random 5 7)
     symbolNum=$(random 1 10)
 
-    symbol="ZCK-980_TNT"
+    symbol="ZCK-980_CE"
     if [ $symbolNum -lt 4 ]
     then
-        symbol="Y2B-822M_TNT"
+        symbol="Y2B-822M_CE"
     elif [ $symbolNum -lt 6 ]
     then
-        symbol="X1M-42FM_TNT"
+        symbol="X1M-42FM_CE"
     else [ $symbolNum -lt 8 ]
-        symbol="ZCK-CD6_TNT"
+        symbol="ZCK-CD6_CE"
     fi
     from="zc"
     if [ $side == 1 ]

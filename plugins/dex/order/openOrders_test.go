@@ -29,7 +29,7 @@ func initKeeper() *DexKeeper {
 func TestOpenOrders_NoSymbol(t *testing.T) {
 	keeper := initKeeper()
 
-	res := keeper.GetOpenOrders("NNB_TNT", zz)
+	res := keeper.GetOpenOrders("NNB_CE", zz)
 	if len(res) == 0 {
 		t.Log("Get expected empty result for a non-existing pair")
 	}
@@ -38,8 +38,8 @@ func TestOpenOrders_NoSymbol(t *testing.T) {
 func TestOpenOrders_NoAddr(t *testing.T) {
 	keeper := initKeeper()
 
-	keeper.AddEngine(types.NewTradingPair("NNB", "TNT", 100000000))
-	res := keeper.GetOpenOrders("NNB_TNT", zz)
+	keeper.AddEngine(types.NewTradingPair("NNB", "CE", 100000000))
+	res := keeper.GetOpenOrders("NNB_CE", zz)
 	if len(res) == 0 {
 		t.Log("Get expected empty result for a non-existing addr")
 	}

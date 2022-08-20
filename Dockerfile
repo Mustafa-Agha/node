@@ -27,8 +27,8 @@ RUN apk add --update ca-certificates
 WORKDIR /root
 
 # Copy over binaries from the build-env
-COPY --from=build-env /go/bin/tntchaind /usr/bin/tntchaind
-COPY --from=build-env /go/bin/tntcli /usr/bin/tntcli
+COPY --from=build-env /go/bin/cechaind /usr/bin/cechaind
+COPY --from=build-env /go/bin/cecli /usr/bin/cecli
 
 # Run gaiad by default, omit entrypoint to ease using container with gaiacli
-CMD ["tntchaind"]
+CMD ["cechaind"]

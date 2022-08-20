@@ -119,7 +119,7 @@ func Test_NonListedPair_Mini(t *testing.T) {
 func runNonListedPair(t *testing.T, symbol string) {
 	assert, _, _ := setup(t, symbol, true)
 
-	res := issueQuery("NNB-000_TNT", buyer.String())
+	res := issueQuery("NNB-000_CE", buyer.String())
 	assert.Equal(uint32(sdk.CodeInternal), res.Code)
 	assert.Equal("pair is not listed", res.Log)
 }

@@ -730,7 +730,7 @@ func Test_mergeTakerSideOrders(t *testing.T) {
 func TestMatchEng_fillOrdersNew(t *testing.T) {
 	assert := assert.New(t)
 	// 1. buy side is maker side
-	me := NewMatchEng("AAA_TNT", 100, 5, 0.05)
+	me := NewMatchEng("AAA_CE", 100, 5, 0.05)
 	makerSideOrders := []OrderPart{
 		{"1", 99, 1000, 700, 300},
 		{"3", 99, 1000, 900, 100},
@@ -791,7 +791,7 @@ func TestMatchEng_fillOrdersNew(t *testing.T) {
 	}, takerSideOrders.orders)
 
 	// 2. sell side is maker side
-	me = NewMatchEng("AAA_TNT", 100, 5, 0.05)
+	me = NewMatchEng("AAA_CE", 100, 5, 0.05)
 	makerSideOrders = []OrderPart{
 		{"2", 99, 1000, 700, 300},
 		{"4", 99, 1000, 800, 200},
@@ -859,7 +859,7 @@ func TestMatchEng_fillOrdersNew(t *testing.T) {
 	}, takerSideOrders.orders)
 
 	// 3. no maker orders
-	me = NewMatchEng("AAA_TNT", 100, 5, 0.05)
+	me = NewMatchEng("AAA_CE", 100, 5, 0.05)
 	makerSideOrders = []OrderPart{
 		{"2", 100, 1000, 700, 300},
 		{"4", 100, 1000, 900, 100},

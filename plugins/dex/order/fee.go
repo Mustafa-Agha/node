@@ -139,11 +139,11 @@ func (m *FeeManager) calcNativeFee(tran *Transfer, engines map[string]*matcheng.
 		nativeFee = m.TradeFee(big.NewInt(tran.out), FeeByNativeToken)
 	} else {
 		// pair pattern: ABC_XYZ/XYZ_ABC, inAsset: ABC
-		// must exist ABC/TNT. or ABC/BUSD after upgrade
+		// must exist ABC/CE. or ABC/BUSD after upgrade
 		notional, pairExist := m.calcNotional(tran.inAsset, tran.in, types.NativeTokenSymbol, engines)
 		if !pairExist {
 			if sdk.IsUpgrade(upgrade.BEP70) && len(BUSDSymbol) > 0 {
-				// must be ABC_BUSD pair, we just use BUSD_TNT price to get the notional
+				// must be ABC_BUSD pair, we just use BUSD_CE price to get the notional
 				var qty int64
 				if tran.inAsset == BUSDSymbol {
 					qty = tran.in
@@ -198,13 +198,13 @@ func (m *FeeManager) CalcTradeFee(balances sdk.Coins, tradeIn sdk.Coin, engines 
 		feeToken = sdk.NewCoin(types.NativeTokenSymbol, m.TradeFee(big.NewInt(inAmt), FeeByNativeToken).Int64())
 	} else {
 		// price against native token,
-		// both `amountOfNativeToken` and `feeByNativeToken` may overflow when it's a non-TNT pair like ABC_XYZ
+		// both `amountOfNativeToken` and `feeByNativeToken` may overflow when it's a non-CE pair like ABC_XYZ
 		var amountOfNativeToken *big.Int
 		if market, ok := engines[utils.Assets2TradingPair(inSymbol, types.NativeTokenSymbol)]; ok {
-			// XYZ_TNT
+			// XYZ_CE
 			amountOfNativeToken = utils.CalBigNotional(market.LastTradePrice, inAmt)
 		} else {
-			// TNT_XYZ
+			// CE_XYZ
 			market := engines[utils.Assets2TradingPair(types.NativeTokenSymbol, inSymbol)]
 			var amount big.Int
 			amountOfNativeToken = amount.Div(
@@ -258,7 +258,7 @@ func (m *FeeManager) CalcFixedFee(balances sdk.Coins, eventType transferEventTyp
 	// TODO: (perf) may remove the big.Int use to improve the performance
 	amount, nativePairExist := m.calcNotional(types.NativeTokenSymbol, feeAmount, inAsset, engines)
 	if !nativePairExist {
-		// for BUSD pairs, it is possible that there is no trading pair between TNT and inAsset, e.g., BUSD -> XYZ
+		// for BUSD pairs, it is possible that there is no trading pair between CE and inAsset, e.g., BUSD -> XYZ
 		if sdk.IsUpgrade(upgrade.BEP70) && len(BUSDSymbol) > 0 {
 			busdAmount, busdPairExist := m.calcNotional(types.NativeTokenSymbol, feeAmount, BUSDSymbol, engines)
 			if busdPairExist {

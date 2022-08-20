@@ -12,7 +12,7 @@ import (
 	tmLogger "github.com/tendermint/tendermint/libs/log"
 )
 
-// Publish market data to local marketdata dir in tntchaind home
+// Publish market data to local marketdata dir in cechaind home
 // each message will be in json format one line in file
 // file can be compressed and auto-rotated
 type LocalMarketDataPublisher struct {

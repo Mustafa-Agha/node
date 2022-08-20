@@ -12,8 +12,8 @@ func RegisterWire(cdc *wire.Codec) {
 	cdc.RegisterInterface((*NamedAccount)(nil), nil)
 	cdc.RegisterInterface((*IToken)(nil), nil)
 
-	cdc.RegisterConcrete(&AppAccount{}, "tntchain/Account", nil)
+	cdc.RegisterConcrete(&AppAccount{}, "cechain/Account", nil)
 
-	cdc.RegisterConcrete(&Token{}, "tntchain/Token", nil)
-	cdc.RegisterConcrete(&MiniToken{}, "tntchain/MiniToken", nil)
+	cdc.RegisterConcrete(&Token{}, "cechain/Token", nil)
+	cdc.RegisterConcrete(&MiniToken{}, "cechain/MiniToken", nil)
 }

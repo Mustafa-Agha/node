@@ -38,7 +38,7 @@ func InitPlugin(
 }
 
 func RegisterUpgradeBeginBlocker(mapper Mapper) {
-	// bind tnt smart chain contract address to tnt token
+	// bind ce smart chain contract address to ce token
 	upgrade.Mgr.RegisterBeginBlocker(upgrade.LaunchBscUpgrade, func(ctx sdk.Context) {
 		err := mapper.UpdateBind(ctx, types.NativeTokenSymbol, "0x0000000000000000000000000000000000000000", 18)
 		if err != nil {

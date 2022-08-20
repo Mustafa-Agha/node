@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # This script is still working in progress.
-clipath='/root/go/src/github.com/Mustafa-Agha/node/build/tntcli'
+clipath='/root/go/src/github.com/Mustafa-Agha/node/build/cecli'
 clihome='/server/bnc/node0/gaiacli'
-chainId='chain-tnt'
+chainId='chain-ce'
 
 
 cli="${clipath} --home ${clihome}"
@@ -11,27 +11,27 @@ cli="${clipath} --home ${clihome}"
 
 ${cli} keys add zc --recover
 ${cli} keys add zz
-result=$(${cli} token issue --from=zc --token-name="New TNT Coin" --symbol=NNB --total-supply=2000000000000000 --chain-id ${chainId})
+result=$(${cli} token issue --from=zc --token-name="New CE Coin" --symbol=NNB --total-supply=2000000000000000 --chain-id ${chainId})
 nnb_symbol=$(echo "${result}" | tail -n 1 | grep -o "NNB-[0-9A-Z]*")
 echo ${nnb_symbol}
 sleep 10
-${cli} gov submit-list-proposal --chain-id ${chainId} --from zc --deposit 200000000000:TNT --base-asset-symbol ${nnb_symbol} --quote-asset-symbol TNT --init-price 1000000000 --title "list NNB/TNT" --description "list NNB/TNT" --expire-time 1644486400
+${cli} gov submit-list-proposal --chain-id ${chainId} --from zc --deposit 200000000000:CE --base-asset-symbol ${nnb_symbol} --quote-asset-symbol CE --init-price 1000000000 --title "list NNB/CE" --description "list NNB/CE" --expire-time 1644486400
 sleep 2
 ${cli} gov vote --from zc --chain-id ${chainId} --proposal-id 7 --option Yes
 sleep 61
-${cli} dex list -s=${nnb_symbol} --quote-asset-symbol=TNT --init-price=1000000000 --from=zc --chain-id ${chainId} --proposal-id 7
+${cli} dex list -s=${nnb_symbol} --quote-asset-symbol=CE --init-price=1000000000 --from=zc --chain-id ${chainId} --proposal-id 7
 sleep 1
 result=$(${cli} token issue --from=zc --token-name="ZC Coin" --symbol=ZCB --total-supply=2000000000000000 --chain-id ${chainId})
 zcb_symbol=$(echo "${result}" | tail -n 1 | grep -o "ZCB-[0-9A-Z]*")
 echo ${zcb_symbol}
 sleep 10
-${cli} gov submit-list-proposal --chain-id ${chainId} --from zc --deposit 200000000000:TNT --base-asset-symbol ${zcb_symbol} --quote-asset-symbol TNT --init-price 1000000000 --title "list ZCB/TNT" --description "list ZCB/TNT" --expire-time 1644486400
+${cli} gov submit-list-proposal --chain-id ${chainId} --from zc --deposit 200000000000:CE --base-asset-symbol ${zcb_symbol} --quote-asset-symbol CE --init-price 1000000000 --title "list ZCB/CE" --description "list ZCB/CE" --expire-time 1644486400
 sleep 2
 ${cli} gov vote --from zc --chain-id ${chainId} --proposal-id 8 --option Yes
 sleep 61
-${cli} dex list -s=${zcb_symbol} --quote-asset-symbol=TNT --init-price=1000000000 --from=zc --chain-id ${chainId} --proposal-id 8
+${cli} dex list -s=${zcb_symbol} --quote-asset-symbol=CE --init-price=1000000000 --from=zc --chain-id ${chainId} --proposal-id 8
 sleep 1
-${cli} send --from=zc --to=cosmosaccaddr1872gjuvfakc6nrrf8qdqsar7anp9ezjly8rrwh --amount=1000000000000000:TNT --chain-id ${chainId}
+${cli} send --from=zc --to=cosmosaccaddr1872gjuvfakc6nrrf8qdqsar7anp9ezjly8rrwh --amount=1000000000000000:CE --chain-id ${chainId}
 sleep 10
 
 function random()
@@ -51,10 +51,10 @@ do
     pause=$(random 5 7)
     symbolNum=$(random 1 10)
 
-    symbol=${nnb_symbol}_TNT
+    symbol=${nnb_symbol}_CE
     if [ $symbolNum -lt 4 ]
     then
-        symbol=${zcb_symbol}_TNT
+        symbol=${zcb_symbol}_CE
     fi
 
     from="zc"

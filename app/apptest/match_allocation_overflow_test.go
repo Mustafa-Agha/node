@@ -23,7 +23,7 @@ func Test_Overflow_1a(t *testing.T) {
 	// 10 * 1e18 > int64 max
 	for i := 0; i < 10; i++ {
 		oid := GetOrderId(addr0, int64(i), ctx)
-		msg := order.NewNewOrderMsg(addr0, oid, 1, "BTC-000_TNT", 1, 1e18)
+		msg := order.NewNewOrderMsg(addr0, oid, 1, "BTC-000_CE", 1, 1e18)
 		res, err := testClient.DeliverTxSync(msg, testApp.Codec)
 		assert.NoError(err)
 		if i < 9 {
@@ -33,7 +33,7 @@ func Test_Overflow_1a(t *testing.T) {
 		}
 	}
 
-	buys, _ := GetOrderBook("BTC-000_TNT")
+	buys, _ := GetOrderBook("BTC-000_CE")
 	assert.Equal(utils.Fixed8(9e18), buys[0].qty)
 }
 
@@ -67,44 +67,44 @@ func Test_Overflow_1b(t *testing.T) {
 
 	for i := 0; i < 10; i++ {
 		oid := GetOrderId(addr0, int64(i), ctx)
-		msg := order.NewNewOrderMsg(addr0, oid, 1, "BTC-000_TNT", int64(i+1), 1e18)
+		msg := order.NewNewOrderMsg(addr0, oid, 1, "BTC-000_CE", int64(i+1), 1e18)
 		res, err := testClient.DeliverTxSync(msg, testApp.Codec)
 		assert.NoError(err)
 		assert.Equal(uint32(0), res.Code)
 	}
 
 	oidS := GetOrderId(addr1, 0, ctx)
-	msgS1 := order.NewNewOrderMsg(addr1, oidS, 2, "BTC-000_TNT", int64(1), 1e13)
+	msgS1 := order.NewNewOrderMsg(addr1, oidS, 2, "BTC-000_CE", int64(1), 1e13)
 	res, err := testClient.DeliverTxSync(msgS1, testApp.Codec)
 	assert.NoError(err)
 	assert.Equal(uint32(0), res.Code)
 
-	buys, sells := GetOrderBook("BTC-000_TNT")
+	buys, sells := GetOrderBook("BTC-000_CE")
 	assert.Equal(10, len(buys))
 	assert.Equal(1, len(sells))
 
 	assert.Equal(int64(100000e8), GetAvail(ctx, addr0, "BTC-000"))
-	assert.Equal(int64(94500e8), GetAvail(ctx, addr0, "TNT"))
-	assert.Equal(int64(5500e8), GetLocked(ctx, addr0, "TNT"))
+	assert.Equal(int64(94500e8), GetAvail(ctx, addr0, "CE"))
+	assert.Equal(int64(5500e8), GetLocked(ctx, addr0, "CE"))
 	assert.Equal(int64(0), GetAvail(ctx, addr1, "BTC-000"))
-	assert.Equal(int64(100000e8), GetAvail(ctx, addr1, "TNT"))
+	assert.Equal(int64(100000e8), GetAvail(ctx, addr1, "CE"))
 	assert.Equal(int64(100000e8), GetLocked(ctx, addr1, "BTC-000"))
 
 	testClient.cl.EndBlockSync(abci.RequestEndBlock{})
 
-	trades, lastPx := testApp.DexKeeper.GetLastTradesForPair("BTC-000_TNT")
+	trades, lastPx := testApp.DexKeeper.GetLastTradesForPair("BTC-000_CE")
 	assert.Equal(int64(10), lastPx)
 	assert.Equal(1, len(trades))
 
-	buys, sells = GetOrderBook("BTC-000_TNT")
+	buys, sells = GetOrderBook("BTC-000_CE")
 	assert.Equal(10, len(buys))
 	assert.Equal(0, len(sells))
 
 	assert.Equal(int64(200000e8), GetAvail(ctx, addr0, "BTC-000"))
-	assert.Equal(int64(94499.99999500e8), GetAvail(ctx, addr0, "TNT"))
-	assert.Equal(int64(5499.9900e8), GetLocked(ctx, addr0, "TNT"))
+	assert.Equal(int64(94499.99999500e8), GetAvail(ctx, addr0, "CE"))
+	assert.Equal(int64(5499.9900e8), GetLocked(ctx, addr0, "CE"))
 	assert.Equal(int64(0), GetAvail(ctx, addr1, "BTC-000"))
-	assert.Equal(int64(100000.00999500e8), GetAvail(ctx, addr1, "TNT"))
+	assert.Equal(int64(100000.00999500e8), GetAvail(ctx, addr1, "CE"))
 	assert.Equal(int64(0), GetLocked(ctx, addr1, "BTC-000"))
 }
 
@@ -138,51 +138,51 @@ func Test_Overflow_1c(t *testing.T) {
 
 	for i := 0; i < 10; i++ {
 		oid := GetOrderId(addr0, int64(i), ctx)
-		msg := order.NewNewOrderMsg(addr0, oid, 1, "BTC-000_TNT", int64(i+1), 1e18)
+		msg := order.NewNewOrderMsg(addr0, oid, 1, "BTC-000_CE", int64(i+1), 1e18)
 		res, err := testClient.DeliverTxSync(msg, testApp.Codec)
 		assert.NoError(err)
 		assert.Equal(uint32(0), res.Code)
 	}
 
 	oidS1 := GetOrderId(addr1, 0, ctx)
-	msgS1 := order.NewNewOrderMsg(addr1, oidS1, 2, "BTC-000_TNT", int64(1), 1e9)
+	msgS1 := order.NewNewOrderMsg(addr1, oidS1, 2, "BTC-000_CE", int64(1), 1e9)
 	res, err := testClient.DeliverTxSync(msgS1, testApp.Codec)
 	assert.NoError(err)
 	assert.Equal(uint32(0), res.Code)
 
-	buys, sells := GetOrderBook("BTC-000_TNT")
+	buys, sells := GetOrderBook("BTC-000_CE")
 	assert.Equal(10, len(buys))
 	assert.Equal(1, len(sells))
 
 	assert.Equal(int64(100000e8), GetAvail(ctx, addr0, "BTC-000"))
-	assert.Equal(int64(94500e8), GetAvail(ctx, addr0, "TNT"))
-	assert.Equal(int64(5500e8), GetLocked(ctx, addr0, "TNT"))
+	assert.Equal(int64(94500e8), GetAvail(ctx, addr0, "CE"))
+	assert.Equal(int64(5500e8), GetLocked(ctx, addr0, "CE"))
 	assert.Equal(int64(99990e8), GetAvail(ctx, addr1, "BTC-000"))
-	assert.Equal(int64(100000e8), GetAvail(ctx, addr1, "TNT"))
+	assert.Equal(int64(100000e8), GetAvail(ctx, addr1, "CE"))
 	assert.Equal(int64(10e8), GetLocked(ctx, addr1, "BTC-000"))
 
 	testClient.cl.EndBlockSync(abci.RequestEndBlock{})
 
-	trades, lastPx := testApp.DexKeeper.GetLastTradesForPair("BTC-000_TNT")
+	trades, lastPx := testApp.DexKeeper.GetLastTradesForPair("BTC-000_CE")
 	assert.Equal(int64(10), lastPx)
 	assert.Equal(1, len(trades))
 
-	buys, sells = GetOrderBook("BTC-000_TNT")
+	buys, sells = GetOrderBook("BTC-000_CE")
 	assert.Equal(10, len(buys))
 	assert.Equal(0, len(sells))
 
-	// fee charged from receiving token btc-000, as fee in tnt is < 1
+	// fee charged from receiving token btc-000, as fee in ce is < 1
 	assert.Equal(int64(100009.9900e8), GetAvail(ctx, addr0, "BTC-000"))
-	assert.Equal(int64(94500e8), GetAvail(ctx, addr0, "TNT"))
-	assert.Equal(int64(5499.99999900e8), GetLocked(ctx, addr0, "TNT"))
+	assert.Equal(int64(94500e8), GetAvail(ctx, addr0, "CE"))
+	assert.Equal(int64(5499.99999900e8), GetLocked(ctx, addr0, "CE"))
 	// in this case, it is expected that no fee charged for sell side
 	assert.Equal(int64(99990e8), GetAvail(ctx, addr1, "BTC-000"))
-	assert.Equal(int64(100000.00000100e8), GetAvail(ctx, addr1, "TNT"))
+	assert.Equal(int64(100000.00000100e8), GetAvail(ctx, addr1, "CE"))
 	assert.Equal(int64(0), GetLocked(ctx, addr1, "BTC-000"))
 }
 
 /*
-test #1d: additional test case using very cheap tnt, not really overflow related
+test #1d: additional test case using very cheap ce, not really overflow related
 */
 func Test_Overflow_1d(t *testing.T) {
 	assert := assert.New(t)
@@ -196,34 +196,34 @@ func Test_Overflow_1d(t *testing.T) {
 	ctx = UpdateContextC(addr, ctx, 1)
 
 	oidB1 := GetOrderId(addr0, 0, ctx)
-	msgB1 := order.NewNewOrderMsg(addr0, oidB1, 1, "BTC-000_TNT", 1e18, 1)
+	msgB1 := order.NewNewOrderMsg(addr0, oidB1, 1, "BTC-000_CE", 1e18, 1)
 	_, err := testClient.DeliverTxSync(msgB1, testApp.Codec)
 	assert.NoError(err)
 
 	oidS1 := GetOrderId(addr1, 0, ctx)
-	msgS1 := order.NewNewOrderMsg(addr1, oidS1, 2, "BTC-000_TNT", 1e18, 1)
+	msgS1 := order.NewNewOrderMsg(addr1, oidS1, 2, "BTC-000_CE", 1e18, 1)
 	_, err = testClient.DeliverTxSync(msgS1, testApp.Codec)
 	assert.NoError(err)
 
-	buys, sells := GetOrderBook("BTC-000_TNT")
+	buys, sells := GetOrderBook("BTC-000_CE")
 	assert.Equal(1, len(buys))
 	assert.Equal(1, len(sells))
 
 	testClient.cl.EndBlockSync(abci.RequestEndBlock{})
 
-	trades, lastPx := testApp.DexKeeper.GetLastTradesForPair("BTC-000_TNT")
+	trades, lastPx := testApp.DexKeeper.GetLastTradesForPair("BTC-000_CE")
 	assert.Equal(int64(1e18), lastPx)
 	assert.Equal(1, len(trades))
 
-	buys, sells = GetOrderBook("BTC-000_TNT")
+	buys, sells = GetOrderBook("BTC-000_CE")
 	assert.Equal(0, len(buys))
 	assert.Equal(0, len(sells))
 
 	assert.Equal(int64(10000000000001), GetAvail(ctx, addr0, "BTC-000"))
-	assert.Equal(int64(1999999989995000000), GetAvail(ctx, addr0, "TNT"))
-	assert.Equal(int64(0), GetLocked(ctx, addr0, "TNT"))
+	assert.Equal(int64(1999999989995000000), GetAvail(ctx, addr0, "CE"))
+	assert.Equal(int64(0), GetLocked(ctx, addr0, "CE"))
 	assert.Equal(int64(9999999999999), GetAvail(ctx, addr1, "BTC-000"))
-	assert.Equal(int64(2000000009995000000), GetAvail(ctx, addr1, "TNT"))
+	assert.Equal(int64(2000000009995000000), GetAvail(ctx, addr1, "CE"))
 	assert.Equal(int64(0), GetLocked(ctx, addr1, "BTC-000"))
 }
 
@@ -238,13 +238,13 @@ func Test_Overflow_2a(t *testing.T) {
 
 	for i := 0; i < 10; i++ {
 		oid := GetOrderId(addr0, int64(i), ctx)
-		msg := order.NewNewOrderMsg(addr0, oid, 2, "BTC-000_TNT", 1e18, 1e8)
+		msg := order.NewNewOrderMsg(addr0, oid, 2, "BTC-000_CE", 1e18, 1e8)
 		res, err := testClient.DeliverTxSync(msg, testApp.Codec)
 		assert.NoError(err)
 		assert.Equal(uint32(0), res.Code)
 	}
 
-	_, sells := GetOrderBook("BTC-000_TNT")
+	_, sells := GetOrderBook("BTC-000_CE")
 	assert.Equal(utils.Fixed8(10e8), sells[0].qty)
 	// grand these orders, when the total amount (q*p + q*p + ... ) of a pair from one address is greater than int64 max
 }
@@ -260,19 +260,19 @@ func Test_Overflow_2b(t *testing.T) {
 
 	for i := 0; i < 5; i++ {
 		oid := GetOrderId(addr0, int64(i), ctx)
-		msg := order.NewNewOrderMsg(addr0, oid, 2, "BTC-000_TNT", 1e18*int64(i+1), 1e8)
+		msg := order.NewNewOrderMsg(addr0, oid, 2, "BTC-000_CE", 1e18*int64(i+1), 1e8)
 		res, err := testClient.DeliverTxSync(msg, testApp.Codec)
 		assert.NoError(err)
 		assert.Equal(uint32(0), res.Code)
 	}
 
-	_, sells := GetOrderBook("BTC-000_TNT")
+	_, sells := GetOrderBook("BTC-000_CE")
 	assert.Equal(5, len(sells))
 	// grand these orders, when the total amount (q*p + q*p + ... ) of a pair from one address is greater than int64 max
 }
 
 /*
-test #3: non tnt pair (with cheap tnt)
+test #3: non ce pair (with cheap ce)
 */
 func Test_Overflow_3(t *testing.T) {
 	assert := assert.New(t)
@@ -309,16 +309,16 @@ func Test_Overflow_3(t *testing.T) {
 
 	assert.Equal(int64(99990e8), GetAvail(ctx, addr0, "ETH-000"))
 	assert.Equal(int64(100000.9990e8), GetAvail(ctx, addr0, "BTC-000"))
-	// for buy side: insufficent tnt (1x1e18 > 100000e8), so fee is deducted from btc-000 => 100001 - 1 * 0.001
-	assert.Equal(int64(100000e8), GetAvail(ctx, addr0, "TNT"))
+	// for buy side: insufficent ce (1x1e18 > 100000e8), so fee is deducted from btc-000 => 100001 - 1 * 0.001
+	assert.Equal(int64(100000e8), GetAvail(ctx, addr0, "CE"))
 	assert.Equal(int64(100009.9900e8), GetAvail(ctx, addr1, "ETH-000"))
 	assert.Equal(int64(99999e8), GetAvail(ctx, addr1, "BTC-000"))
 	// for sell side: it is overflowed (10x1e18 > int64 max), so fee is deducted from eth-000 => 10e8 * 0.001 = 0.01e8
-	assert.Equal(int64(100000e8), GetAvail(ctx, addr1, "TNT"))
+	assert.Equal(int64(100000e8), GetAvail(ctx, addr1, "CE"))
 }
 
 /*
-test #4: non tnt pair (with expansive tnt)
+test #4: non ce pair (with expansive ce)
 */
 func Test_Overflow_4(t *testing.T) {
 	assert := assert.New(t)
@@ -355,10 +355,10 @@ func Test_Overflow_4(t *testing.T) {
 
 	assert.Equal(int64(100000.9990e8), GetAvail(ctx, addr0, "BTC-000"))
 	assert.Equal(int64(99990e8), GetAvail(ctx, addr0, "ETH-000"))
-	assert.Equal(int64(100000e8), GetAvail(ctx, addr0, "TNT"))
+	assert.Equal(int64(100000e8), GetAvail(ctx, addr0, "CE"))
 	assert.Equal(int64(100009.9900e8), GetAvail(ctx, addr1, "ETH-000"))
 	assert.Equal(int64(99999e8), GetAvail(ctx, addr1, "BTC-000"))
-	assert.Equal(int64(100000e8), GetAvail(ctx, addr1, "TNT"))
+	assert.Equal(int64(100000e8), GetAvail(ctx, addr1, "CE"))
 }
 
 /*
@@ -383,38 +383,38 @@ func Test_Overflow_5(t *testing.T) {
 	*/
 
 	oidB1 := GetOrderId(addr0, 0, ctx)
-	msgB1 := order.NewNewOrderMsg(addr0, oidB1, 1, "BTC-000_TNT", 5, 5e18)
+	msgB1 := order.NewNewOrderMsg(addr0, oidB1, 1, "BTC-000_CE", 5, 5e18)
 	_, err := testClient.DeliverTxSync(msgB1, testApp.Codec)
 	assert.NoError(err)
 
 	oidB2 := GetOrderId(addr0, 1, ctx)
-	msgB2 := order.NewNewOrderMsg(addr0, oidB2, 1, "BTC-000_TNT", 4, 5e18)
+	msgB2 := order.NewNewOrderMsg(addr0, oidB2, 1, "BTC-000_CE", 4, 5e18)
 	_, err = testClient.DeliverTxSync(msgB2, testApp.Codec)
 	assert.NoError(err)
 
 	oidS1 := GetOrderId(addr1, 0, ctx)
-	msgS1 := order.NewNewOrderMsg(addr1, oidS1, 2, "BTC-000_TNT", 3, 9e18)
+	msgS1 := order.NewNewOrderMsg(addr1, oidS1, 2, "BTC-000_CE", 3, 9e18)
 	_, err = testClient.DeliverTxSync(msgS1, testApp.Codec)
 	assert.NoError(err)
 
-	buys, sells := GetOrderBook("BTC-000_TNT")
+	buys, sells := GetOrderBook("BTC-000_CE")
 	assert.Equal(2, len(buys))
 	assert.Equal(1, len(sells))
 
 	testClient.cl.EndBlockSync(abci.RequestEndBlock{})
 
-	trades, lastPx := testApp.DexKeeper.GetLastTradesForPair("BTC-000_TNT")
+	trades, lastPx := testApp.DexKeeper.GetLastTradesForPair("BTC-000_CE")
 	assert.Equal(int64(3), lastPx)
 	assert.Equal(2, len(trades))
 
-	buys, sells = GetOrderBook("BTC-000_TNT")
+	buys, sells = GetOrderBook("BTC-000_CE")
 	assert.Equal(1, len(buys))
 	assert.Equal(0, len(sells))
 
 	assert.Equal(int64(9e18), GetAvail(ctx, addr0, "BTC-000"))
-	assert.Equal(int64(96898.6500e8), GetAvail(ctx, addr0, "TNT"))
-	assert.Equal(int64(400e8), GetLocked(ctx, addr0, "TNT"))
+	assert.Equal(int64(96898.6500e8), GetAvail(ctx, addr0, "CE"))
+	assert.Equal(int64(400e8), GetLocked(ctx, addr0, "CE"))
 	assert.Equal(int64(0), GetAvail(ctx, addr1, "BTC-000"))
-	assert.Equal(int64(102698.6500e8), GetAvail(ctx, addr1, "TNT"))
+	assert.Equal(int64(102698.6500e8), GetAvail(ctx, addr1, "CE"))
 	assert.Equal(int64(0), GetLocked(ctx, addr1, "BTC-000"))
 }

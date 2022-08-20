@@ -34,8 +34,8 @@ import (
 // rootCmd is the entry point for this binary
 var (
 	rootCmd = &cobra.Command{
-		Use:   "tntcli",
-		Short: "TNTChain light-client",
+		Use:   "cecli",
+		Short: "CEChain light-client",
 	}
 )
 

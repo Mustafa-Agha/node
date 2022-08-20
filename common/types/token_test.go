@@ -16,8 +16,8 @@ var issueMsgSymbolTestCases = []struct {
 	correct bool
 }{
 	// happy
-	{types.NativeTokenSymbol, true},             // TNT
-	{types.NativeTokenSymbolDotBSuffixed, true}, // TNT.B
+	{types.NativeTokenSymbol, true},             // CE
+	{types.NativeTokenSymbolDotBSuffixed, true}, // CE.B
 	{"XYZ", true},
 	{"XYZ45678", true},
 	{"XYZ45678.B", true}, // still ok - .B suffix extends max len by suffix len
@@ -38,8 +38,8 @@ var tokenMapperSymbolTestCases = []struct {
 	correct bool
 }{
 	// happy
-	{types.NativeTokenSymbol, true},             // TNT
-	{types.NativeTokenSymbolDotBSuffixed, true}, // TNT.B
+	{types.NativeTokenSymbol, true},             // CE
+	{types.NativeTokenSymbolDotBSuffixed, true}, // CE.B
 	{"XYZ45678-000", true},
 	{"XYZ-000", true},
 	{"1YZ-000", true},

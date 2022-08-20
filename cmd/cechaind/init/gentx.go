@@ -24,7 +24,7 @@ import (
 )
 
 const (
-	defaultAmount                  = "100000000000:TNT"
+	defaultAmount                  = "100000000000:CE"
 	defaultCommissionRate          = "0"
 	defaultCommissionMaxRate       = "0"
 	defaultCommissionMaxChangeRate = "0"

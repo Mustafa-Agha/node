@@ -18,7 +18,7 @@ import (
 
 // This test ensures schema or AvroOrJsonMsg change are consistent and prevent marshal error in runtime
 var testBlock = `
-{"ChainID":"tntchain-1000","CryptoBlock":{"BlockHash":"b42e1f89b9986c441a2de425e3c7ce90859276899f7900a2be5b7a24d2123b7a","ParentHash":"dd444e38f1874993ba92b0bb420b0f534e6333a893066207467ea3b6117dabee","BlockHeight":580,"Timestamp":"2019-09-17T07:00:02.678369Z","TxTotal":28,"NativeBlockMeta":{"LastCommitHash":"5ef145920e6714acc4f9bfbca8b51fb11dd82e9704e9a62cc83f6630d5c8a9a2","DataHash":"06381b06d80d6462899656d14cc7898878bbd1bcc3458fc592aa97947396307a","ValidatorsHash":"a8209794d6638a7cd09cfcd8381eb5568ed9b20cf5e0332bec60629409da9f2f","NextValidatorsHash":"a8209794d6638a7cd09cfcd8381eb5568ed9b20cf5e0332bec60629409da9f2f","ConsensusHash":"294d8fbd0b94b767a7eba9840f299a3586da7fe6b5dead3b7eecba193c400f93","AppHash":"15f60c1ca6b5ef6bcac93a7969424ff1e3e330804127586adc7e18cefbc3e33d","LastResultsHash":"","EvidenceHash":"","ProposerAddress":"bca1ry8p38u46jkrfjfmqdg5kx3ymktshyqrqdp3rz"},"Transactions":[{"TxHash":"A495179A39D033ABC3A0BB95526EDCFFC6256D3EBAE62CB79E09774853774DE6","Fee":"37500TNT","Timestamp":"2019-09-17T07:00:02.678369Z","Inputs":[{"Address":"tnt1lag5vw33q99jp73rs4murl35terycjxay07eyg","Coins":null}],"Outputs":null,"NativeTransaction":{"Source":0,"TxType":"HTLT","TxAsset":"","OrderId":"","Code":0,"Data":"{\"from\":\"tnt1lag5vw33q99jp73rs4murl35terycjxay07eyg\",\"to\":\"tnt16unm97grz9m3snejn9nv80th7eu24d02ux6z5g\",\"recipient_other_chain\":\"\",\"sender_other_chain\":\"\",\"random_number_hash\":\"8e740d3d7c2b9450a311bda08dc53225a791f4993544603e02a6949b8bb7afdb\",\"timestamp\":1568703602,\"amount\":[{\"denom\":\"TNT\",\"amount\":100000000}],\"expected_income\":\"10000:ETH-746\",\"height_span\":500,\"cross_chain\":false}"}}]}}
+{"ChainID":"cechain-1000","CryptoBlock":{"BlockHash":"b42e1f89b9986c441a2de425e3c7ce90859276899f7900a2be5b7a24d2123b7a","ParentHash":"dd444e38f1874993ba92b0bb420b0f534e6333a893066207467ea3b6117dabee","BlockHeight":580,"Timestamp":"2019-09-17T07:00:02.678369Z","TxTotal":28,"NativeBlockMeta":{"LastCommitHash":"5ef145920e6714acc4f9bfbca8b51fb11dd82e9704e9a62cc83f6630d5c8a9a2","DataHash":"06381b06d80d6462899656d14cc7898878bbd1bcc3458fc592aa97947396307a","ValidatorsHash":"a8209794d6638a7cd09cfcd8381eb5568ed9b20cf5e0332bec60629409da9f2f","NextValidatorsHash":"a8209794d6638a7cd09cfcd8381eb5568ed9b20cf5e0332bec60629409da9f2f","ConsensusHash":"294d8fbd0b94b767a7eba9840f299a3586da7fe6b5dead3b7eecba193c400f93","AppHash":"15f60c1ca6b5ef6bcac93a7969424ff1e3e330804127586adc7e18cefbc3e33d","LastResultsHash":"","EvidenceHash":"","ProposerAddress":"bca1ry8p38u46jkrfjfmqdg5kx3ymktshyqrqdp3rz"},"Transactions":[{"TxHash":"A495179A39D033ABC3A0BB95526EDCFFC6256D3EBAE62CB79E09774853774DE6","Fee":"37500CE","Timestamp":"2019-09-17T07:00:02.678369Z","Inputs":[{"Address":"ce1lag5vw33q99jp73rs4murl35terycjxay07eyg","Coins":null}],"Outputs":null,"NativeTransaction":{"Source":0,"TxType":"HTLT","TxAsset":"","OrderId":"","Code":0,"Data":"{\"from\":\"ce1lag5vw33q99jp73rs4murl35terycjxay07eyg\",\"to\":\"ce16unm97grz9m3snejn9nv80th7eu24d02ux6z5g\",\"recipient_other_chain\":\"\",\"sender_other_chain\":\"\",\"random_number_hash\":\"8e740d3d7c2b9450a311bda08dc53225a791f4993544603e02a6949b8bb7afdb\",\"timestamp\":1568703602,\"amount\":[{\"denom\":\"CE\",\"amount\":100000000}],\"expected_income\":\"10000:ETH-746\",\"height_span\":500,\"cross_chain\":false}"}}]}}
 `
 
 func TestMain(m *testing.M) {
@@ -32,17 +32,17 @@ func TestExecutionResultsMarshaling(t *testing.T) {
 	trades := trades{
 		NumOfMsgs: 1,
 		Trades: []*Trade{{
-			Id: "42-0", Symbol: "NNB_TNT", Price: 100, Qty: 100,
+			Id: "42-0", Symbol: "NNB_CE", Price: 100, Qty: 100,
 			Sid: "s-1", Bid: "b-1", TickType: 1,
-			Sfee: "TNT:8;ETH:1", Bfee: "TNT:10;BTC:1", SSingleFee: "TNT:8;ETH:1", BSingleFee: "TNT:10;BTC:1",
+			Sfee: "CE:8;ETH:1", Bfee: "CE:10;BTC:1", SSingleFee: "CE:8;ETH:1", BSingleFee: "CE:10;BTC:1",
 			SAddr: "s", BAddr: "b", SSrc: 0, BSrc: 0}},
 	}
 	orders := Orders{
 		NumOfMsgs: 3,
 		Orders: []*Order{
-			{"NNB_TNT", orderPkg.Ack, "b-1", "", "b", orderPkg.Side.BUY, orderPkg.OrderType.LIMIT, 100, 100, 0, 0, 0, "", 100, 100, orderPkg.TimeInForce.GTE, orderPkg.NEW, "", ""},
-			{"NNB_TNT", orderPkg.FullyFill, "b-1", "42-0", "b", orderPkg.Side.BUY, orderPkg.OrderType.LIMIT, 100, 100, 100, 100, 100, "TNT:10;BTC:1", 100, 100, orderPkg.TimeInForce.GTE, orderPkg.NEW, "", "TNT:10;BTC:1"},
-			{"NNB_TNT", orderPkg.FullyFill, "s-1", "42-0", "s", orderPkg.Side.SELL, orderPkg.OrderType.LIMIT, 100, 100, 100, 100, 100, "TNT:8;ETH:1", 99, 99, orderPkg.TimeInForce.GTE, orderPkg.NEW, "", "TNT:8;ETH:1"},
+			{"NNB_CE", orderPkg.Ack, "b-1", "", "b", orderPkg.Side.BUY, orderPkg.OrderType.LIMIT, 100, 100, 0, 0, 0, "", 100, 100, orderPkg.TimeInForce.GTE, orderPkg.NEW, "", ""},
+			{"NNB_CE", orderPkg.FullyFill, "b-1", "42-0", "b", orderPkg.Side.BUY, orderPkg.OrderType.LIMIT, 100, 100, 100, 100, 100, "CE:10;BTC:1", 100, 100, orderPkg.TimeInForce.GTE, orderPkg.NEW, "", "CE:10;BTC:1"},
+			{"NNB_CE", orderPkg.FullyFill, "s-1", "42-0", "s", orderPkg.Side.SELL, orderPkg.OrderType.LIMIT, 100, 100, 100, 100, 100, "CE:8;ETH:1", 99, 99, orderPkg.TimeInForce.GTE, orderPkg.NEW, "", "CE:8;ETH:1"},
 		},
 	}
 	proposals := Proposals{
@@ -55,14 +55,14 @@ func TestExecutionResultsMarshaling(t *testing.T) {
 	}
 
 	valAddr, _ := sdk.ValAddressFromBech32("bva1e2y8w2rz957lahwy0y5h3w53sm8d78qexkn3rh")
-	delAddr, _ := sdk.AccAddressFromBech32("tnt1e2y8w2rz957lahwy0y5h3w53sm8d78qex2jpan")
+	delAddr, _ := sdk.AccAddressFromBech32("ce1e2y8w2rz957lahwy0y5h3w53sm8d78qex2jpan")
 	stakeUpdates := StakeUpdates{
 		NumOfMsgs: 1,
 		CompletedUnbondingDelegations: []*CompletedUnbondingDelegation{
 			{
 				Validator: valAddr,
 				Delegator: delAddr,
-				Amount:    Coin{"TNT", 100000000000},
+				Amount:    Coin{"CE", 100000000000},
 			},
 		},
 	}
@@ -83,7 +83,7 @@ func TestExecutionResultsMarshaling(t *testing.T) {
 
 func TestBooksMarshaling(t *testing.T) {
 	publisher := NewKafkaMarketDataPublisher(Logger, "", false)
-	book := OrderBookDelta{"NNB_TNT", []PriceLevel{{100, 100}}, []PriceLevel{{100, 100}}}
+	book := OrderBookDelta{"NNB_CE", []PriceLevel{{100, 100}}, []PriceLevel{{100, 100}}}
 	msg := Books{42, 100, 1, []OrderBookDelta{book}}
 	_, err := publisher.marshal(&msg, booksTpe)
 	if err != nil {
@@ -93,7 +93,7 @@ func TestBooksMarshaling(t *testing.T) {
 
 func TestAccountsMarshaling(t *testing.T) {
 	publisher := NewKafkaMarketDataPublisher(Logger, "", false)
-	accs := []Account{{"b-1", "TNT:1000;BTC:10", 0, []*AssetBalance{{Asset: "TNT", Free: 100}}}}
+	accs := []Account{{"b-1", "CE:1000;BTC:10", 0, []*AssetBalance{{Asset: "CE", Free: 100}}}}
 	msg := Accounts{42, 2, accs}
 	_, err := publisher.marshal(&msg, accountsTpe)
 	if err != nil {
@@ -103,7 +103,7 @@ func TestAccountsMarshaling(t *testing.T) {
 
 func TestBlockFeeMarshaling(t *testing.T) {
 	publisher := NewKafkaMarketDataPublisher(Logger, "", false)
-	msg := BlockFee{1, "TNT:1000;BTC:10", []string{"bnc1", "bnc2", "bnc3"}}
+	msg := BlockFee{1, "CE:1000;BTC:10", []string{"bnc1", "bnc2", "bnc3"}}
 	_, err := publisher.marshal(&msg, blockFeeTpe)
 	if err != nil {
 		t.Fatal(err)
@@ -112,7 +112,7 @@ func TestBlockFeeMarshaling(t *testing.T) {
 
 func TestTransferMarshaling(t *testing.T) {
 	publisher := NewKafkaMarketDataPublisher(Logger, "", false)
-	msg := Transfers{42, 20, 1000, []Transfer{{TxHash: "123456ABCDE", Memo: "1234", From: "", To: []Receiver{{"bnc1", []Coin{{"TNT", 100}, {"BTC", 100}}}, {"bnc2", []Coin{{"TNT", 200}, {"BTC", 200}}}}}}}
+	msg := Transfers{42, 20, 1000, []Transfer{{TxHash: "123456ABCDE", Memo: "1234", From: "", To: []Receiver{{"bnc1", []Coin{{"CE", 100}, {"BTC", 100}}}, {"bnc2", []Coin{{"CE", 200}, {"BTC", 200}}}}}}}
 	_, err := publisher.marshal(&msg, transferTpe)
 	if err != nil {
 		t.Fatal(err)
@@ -137,8 +137,8 @@ func TestCrossTransferMarsha(t *testing.T) {
 		Num:       2,
 		Timestamp: time.Now().Unix(),
 		Transfers: []CrossTransfer{
-			{TxHash: "xxxx", ChainId: "rialto", Type: "xx", From: "xxxx", RelayerFee: 1, Denom: "TNT", To: []CrossReceiver{{Addr: "xxxx", Amount: 100}}},
-			{TxHash: "xxxx", ChainId: "rialto", Type: "xx", From: "xxxx", RelayerFee: 0, Denom: "TNT", To: []CrossReceiver{{Addr: "xxxx", Amount: 100}}},
+			{TxHash: "xxxx", ChainId: "rialto", Type: "xx", From: "xxxx", RelayerFee: 1, Denom: "CE", To: []CrossReceiver{{Addr: "xxxx", Amount: 100}}},
+			{TxHash: "xxxx", ChainId: "rialto", Type: "xx", From: "xxxx", RelayerFee: 0, Denom: "CE", To: []CrossReceiver{{Addr: "xxxx", Amount: 100}}},
 		},
 	}
 	_, err := publisher.marshal(&msg, crossTransferTpe)
@@ -184,7 +184,7 @@ func TestSideProposalMarsha(t *testing.T) {
 func TestStakingMarshaling(t *testing.T) {
 	publisher := NewKafkaMarketDataPublisher(Logger, "", false)
 	valAddr, _ := sdk.ValAddressFromBech32("bva1e2y8w2rz957lahwy0y5h3w53sm8d78qexkn3rh")
-	delAddr, _ := sdk.AccAddressFromBech32("tnt1e2y8w2rz957lahwy0y5h3w53sm8d78qex2jpan")
+	delAddr, _ := sdk.AccAddressFromBech32("ce1e2y8w2rz957lahwy0y5h3w53sm8d78qex2jpan")
 
 	dels := make(map[string][]*Delegation)
 	dels["chain-id-1"] = []*Delegation{{
@@ -206,7 +206,7 @@ func TestStakingMarshaling(t *testing.T) {
 		}},
 		RemovedValidators: removedVals,
 		Delegations:       dels,
-		DelegateEvents:    map[string][]*DelegateEvent{"chain-id-1": {&DelegateEvent{delAddr, valAddr, Coin{Denom: "TNT", Amount: 99999999}, "0xadkjgege"}}},
+		DelegateEvents:    map[string][]*DelegateEvent{"chain-id-1": {&DelegateEvent{delAddr, valAddr, Coin{Denom: "CE", Amount: 99999999}, "0xadkjgege"}}},
 		ElectedValidators: map[string][]*Validator{"chain-id-1": {&Validator{
 			FeeAddr:         delAddr,
 			OperatorAddr:    valAddr,
@@ -229,7 +229,7 @@ func TestStakingMarshaling(t *testing.T) {
 func TestSlashMarshaling(t *testing.T) {
 	publisher := NewKafkaMarketDataPublisher(Logger, "", false)
 	valAddr, _ := sdk.ValAddressFromBech32("bva1e2y8w2rz957lahwy0y5h3w53sm8d78qexkn3rh")
-	submitterAddr, _ := sdk.AccAddressFromBech32("tnt1e2y8w2rz957lahwy0y5h3w53sm8d78qex2jpan")
+	submitterAddr, _ := sdk.AccAddressFromBech32("ce1e2y8w2rz957lahwy0y5h3w53sm8d78qex2jpan")
 	slash := make(map[string][]*Slash)
 	slashItem := &Slash{
 		Validator:        valAddr,

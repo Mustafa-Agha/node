@@ -10,9 +10,9 @@ set proposal_id [lindex $argv 6]
 
 set timeout 30
 	if {"${home}" == ""} {
-		spawn ./tntcli dex list -s $symbol --quote-asset-symbol $quote_symbol --from $from --init-price $init_price --chain-id $chain_id --proposal-id $proposal_id
+		spawn ./cecli dex list -s $symbol --quote-asset-symbol $quote_symbol --from $from --init-price $init_price --chain-id $chain_id --proposal-id $proposal_id
 	} else {
-		spawn ./tntcli dex list --home $home -s $symbol --quote-asset-symbol $quote_symbol --from $from --init-price $init_price --chain-id $chain_id --proposal-id $proposal_id
+		spawn ./cecli dex list --home $home -s $symbol --quote-asset-symbol $quote_symbol --from $from --init-price $init_price --chain-id $chain_id --proposal-id $proposal_id
 	}
 	expect "Password*"
 	send "12345678\r"

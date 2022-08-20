@@ -275,8 +275,8 @@ type AddressConfig struct {
 
 func defaultAddressConfig() *AddressConfig {
 	return &AddressConfig{
-		Bech32PrefixAccAddr:  "tnt",
-		Bech32PrefixAccPub:   "tntp",
+		Bech32PrefixAccAddr:  "ce",
+		Bech32PrefixAccPub:   "cep",
 		Bech32PrefixValAddr:  "bva",
 		Bech32PrefixValPub:   "bvap",
 		Bech32PrefixConsAddr: "bca",

@@ -20,21 +20,21 @@ show token info
 list trade pair
 
 ```shell
-./list.sh -s ADA --quote-symbol TNT --from alice --init-price 1
+./list.sh -s ADA --quote-symbol CE --from alice --init-price 1
 ```
 
 ### order.sh
 make orders
 
 ```shell
-./order.sh --list-pair BTC_TNT --side 1 --price 1 --quantity 100 --from alice --tif 1
+./order.sh --list-pair BTC_CE --side 1 --price 1 --quantity 100 --from alice --tif 1
 ```
 
 ### show.sh
 show order book
 
 ```shell 
-./show.sh -l ADA_TNT --from alice
+./show.sh -l ADA_CE --from alice
 ```
 
 ### cancel.sh

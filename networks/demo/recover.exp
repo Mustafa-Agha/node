@@ -11,7 +11,7 @@ if { "${recover}" == "true" } {
 }
 
 set timeout 30
-	spawn ./tntcli keys add --home ./testnodecli $recover $name
+	spawn ./cecli keys add --home ./testnodecli $recover $name
 	expect "Enter*"
 	send "12345678\r"
 	expect "Repeat*"

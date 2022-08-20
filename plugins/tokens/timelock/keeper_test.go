@@ -70,12 +70,12 @@ func TestKeeper_TimeLock(t *testing.T) {
 
 	_, acc := testutils.NewAccount(ctx, accKeeper, 0)
 	_ = acc.SetCoins(sdk.Coins{
-		sdk.NewCoin("TNT", 1000e8),
+		sdk.NewCoin("CE", 1000e8),
 	}.Sort())
 	accKeeper.SetAccount(ctx, acc)
 
 	lockCoins := sdk.Coins{
-		sdk.NewCoin("TNT", 900e8),
+		sdk.NewCoin("CE", 900e8),
 	}.Sort()
 
 	record, err := keeper.TimeLock(ctx, acc.GetAddress(), "Test", lockCoins, time.Now().Add(1000*time.Second))
@@ -100,12 +100,12 @@ func TestKeeper_TimeLock_ErrorLockTime(t *testing.T) {
 
 	_, acc := testutils.NewAccount(ctx, accKeeper, 0)
 	_ = acc.SetCoins(sdk.Coins{
-		sdk.NewCoin("TNT", 1000e8),
+		sdk.NewCoin("CE", 1000e8),
 	}.Sort())
 	accKeeper.SetAccount(ctx, acc)
 
 	lockCoins := sdk.Coins{
-		sdk.NewCoin("TNT", 900e8),
+		sdk.NewCoin("CE", 900e8),
 	}.Sort()
 
 	_, err := keeper.TimeLock(ctx, acc.GetAddress(), "Test", lockCoins, time.Now().Add(-1000*time.Second))
@@ -124,7 +124,7 @@ func TestKeeper_TimeLock_InsufficentFund(t *testing.T) {
 	_, acc := testutils.NewAccount(ctx, accKeeper, 0)
 
 	lockCoins := sdk.Coins{
-		sdk.NewCoin("TNT", 900e8),
+		sdk.NewCoin("CE", 900e8),
 	}.Sort()
 
 	_, err := keeper.TimeLock(ctx, acc.GetAddress(), "Test", lockCoins, time.Now().Add(1000*time.Second))
@@ -158,12 +158,12 @@ func TestKeeper_TimeUnlock_ErrLockTime(t *testing.T) {
 
 	_, acc := testutils.NewAccount(ctx, accKeeper, 0)
 	_ = acc.SetCoins(sdk.Coins{
-		sdk.NewCoin("TNT", 1000e8),
+		sdk.NewCoin("CE", 1000e8),
 	}.Sort())
 	accKeeper.SetAccount(ctx, acc)
 
 	lockCoins := sdk.Coins{
-		sdk.NewCoin("TNT", 900e8),
+		sdk.NewCoin("CE", 900e8),
 	}.Sort()
 
 	record, err := keeper.TimeLock(ctx, acc.GetAddress(), "Test", lockCoins, time.Now().Add(1000*time.Second))
@@ -185,12 +185,12 @@ func TestKeeper_TimeUnlock_Success(t *testing.T) {
 
 	_, acc := testutils.NewAccount(ctx, accKeeper, 0)
 	_ = acc.SetCoins(sdk.Coins{
-		sdk.NewCoin("TNT", 1000e8),
+		sdk.NewCoin("CE", 1000e8),
 	}.Sort())
 	accKeeper.SetAccount(ctx, acc)
 
 	lockCoins := sdk.Coins{
-		sdk.NewCoin("TNT", 900e8),
+		sdk.NewCoin("CE", 900e8),
 	}.Sort()
 
 	record, err := keeper.TimeLock(ctx, acc.GetAddress(), "Test", lockCoins, time.Now().Add(1000*time.Second))
@@ -227,19 +227,19 @@ func TestKeeper_TimeRelock_Error(t *testing.T) {
 
 	_, acc := testutils.NewAccount(ctx, accKeeper, 0)
 	_ = acc.SetCoins(sdk.Coins{
-		sdk.NewCoin("TNT", 2000e8),
+		sdk.NewCoin("CE", 2000e8),
 	}.Sort())
 	accKeeper.SetAccount(ctx, acc)
 
 	lockCoins := sdk.Coins{
-		sdk.NewCoin("TNT", 900e8),
+		sdk.NewCoin("CE", 900e8),
 	}.Sort()
 
 	record, err := keeper.TimeLock(ctx, acc.GetAddress(), "Test", lockCoins, time.Now().Add(1000*time.Second))
 	require.Nil(t, err)
 
 	errAmount := sdk.Coins{
-		sdk.NewCoin("TNT", 800e8),
+		sdk.NewCoin("CE", 800e8),
 	}.Sort()
 
 	err = keeper.TimeRelock(ctx, acc.GetAddress(), record.Id, TimeLockRecord{Amount: errAmount})
@@ -267,19 +267,19 @@ func TestKeeper_TimeRelock(t *testing.T) {
 
 	_, acc := testutils.NewAccount(ctx, accKeeper, 0)
 	_ = acc.SetCoins(sdk.Coins{
-		sdk.NewCoin("TNT", 2000e8),
+		sdk.NewCoin("CE", 2000e8),
 	}.Sort())
 	accKeeper.SetAccount(ctx, acc)
 
 	lockCoins := sdk.Coins{
-		sdk.NewCoin("TNT", 900e8),
+		sdk.NewCoin("CE", 900e8),
 	}.Sort()
 
 	record, err := keeper.TimeLock(ctx, acc.GetAddress(), "Test", lockCoins, time.Now().Add(1000*time.Second))
 	require.Nil(t, err)
 
 	newAmount := sdk.Coins{
-		sdk.NewCoin("TNT", 1000e8),
+		sdk.NewCoin("CE", 1000e8),
 	}.Sort()
 
 	newRecord := TimeLockRecord{

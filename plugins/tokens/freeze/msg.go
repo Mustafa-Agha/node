@@ -48,7 +48,7 @@ func (msg FreezeMsg) ValidateBasic() sdk.Error {
 		return nil
 	}
 	// if BEP8 not upgraded, we rely on `ValidateTokenSymbol` rejecting the MiniToken.
-	// expect all msgs that reference a token after issue to use the suffixed form (e.g. "TNT-ABC")
+	// expect all msgs that reference a token after issue to use the suffixed form (e.g. "CE-ABC")
 	err := types.ValidateTokenSymbol(msg.Symbol)
 	if err != nil {
 		return sdk.ErrInvalidCoins(err.Error())
@@ -97,7 +97,7 @@ func (msg UnfreezeMsg) ValidateBasic() sdk.Error {
 		return nil
 	}
 	// if BEP8 not upgraded, we rely on `ValidateTokenSymbol` rejecting the MiniToken.
-	// expect all msgs that reference a token after issue to use the suffixed form (e.g. "TNT-ABC")
+	// expect all msgs that reference a token after issue to use the suffixed form (e.g. "CE-ABC")
 	err := types.ValidateTokenSymbol(msg.Symbol)
 	if err != nil {
 		return sdk.ErrInvalidCoins(err.Error())

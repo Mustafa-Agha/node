@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	BSCTNTDecimals int8 = 18
+	BSCCEDecimals int8 = 18
 
 	BindChannel        = "bind"
 	TransferOutChannel = "transferOut"
@@ -24,6 +24,6 @@ const (
 	MinTransferOutExpireTimeGap = 60 * time.Second
 	MinBindExpireTimeGap        = 600 * time.Second
 
-	TNTContractAddr     = "0x0000000000000000000000000000000000000000"
-	TNTContractDecimals = 18
+	CEContractAddr     = "0x0000000000000000000000000000000000000000"
+	CEContractDecimals = 18
 )

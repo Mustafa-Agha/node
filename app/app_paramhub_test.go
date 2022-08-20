@@ -51,8 +51,8 @@ var (
 	memDB                             = dbm.NewMemDB()
 	logger                            = log.NewTMLogger(os.Stdout)
 	genAccs, addrs, pubKeys, privKeys = mock.CreateGenAccounts(4,
-		sdk.Coins{sdk.NewCoin("TNT", 500000e8), sdk.NewCoin("BTC-000", 200e8)})
-	testScParams = `[{"type": "params/StakeParamSet","value": {"unbonding_time": "604800000000000","max_validators": 11,"bond_denom": "TNT","min_self_delegation": "5000000000000","min_delegation_change": "100000000","reward_distribution_batch_size":"1000"}},{"type": "params/SlashParamSet","value": {"max_evidence_age": "259200000000000","signed_blocks_window": "0","min_signed_per_window": "0","double_sign_unbond_duration": "9223372036854775807","downtime_unbond_duration": "172800000000000","too_low_del_unbond_duration": "86400000000000","slash_fraction_double_sign": "0","slash_fraction_downtime": "0","double_sign_slash_amount": "1000000000000","downtime_slash_amount": "5000000000","submitter_reward": "100000000000","downtime_slash_fee": "1000000000"}},{"type": "params/OracleParamSet","value": {"ConsensusNeeded": "70000000"}},{"type": "params/IbcParamSet","value": {"relayer_fee": "1000000"}}]`
+		sdk.Coins{sdk.NewCoin("CE", 500000e8), sdk.NewCoin("BTC-000", 200e8)})
+	testScParams = `[{"type": "params/StakeParamSet","value": {"unbonding_time": "604800000000000","max_validators": 11,"bond_denom": "CE","min_self_delegation": "5000000000000","min_delegation_change": "100000000","reward_distribution_batch_size":"1000"}},{"type": "params/SlashParamSet","value": {"max_evidence_age": "259200000000000","signed_blocks_window": "0","min_signed_per_window": "0","double_sign_unbond_duration": "9223372036854775807","downtime_unbond_duration": "172800000000000","too_low_del_unbond_duration": "86400000000000","slash_fraction_double_sign": "0","slash_fraction_downtime": "0","double_sign_slash_amount": "1000000000000","downtime_slash_amount": "5000000000","submitter_reward": "100000000000","downtime_slash_fee": "1000000000"}},{"type": "params/OracleParamSet","value": {"ConsensusNeeded": "70000000"}},{"type": "params/IbcParamSet","value": {"relayer_fee": "1000000"}}]`
 	testClient   *TestClient
 	testApp      *BinanceChain
 )
@@ -79,7 +79,7 @@ func TestCSCParamUpdatesSuccess(t *testing.T) {
 	}
 	cscParam.Check()
 	cscParamsBz, err := Codec.MarshalJSON(cscParam)
-	proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(cscParamsBz), gov.ProposalTypeCSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"TNT", 2000e8}}, time.Second, "bsc")
+	proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(cscParamsBz), gov.ProposalTypeCSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"CE", 2000e8}}, time.Second, "bsc")
 	res, err := testClient.DeliverTxSync(&proposeMsg, testApp.Codec)
 	fmt.Println(res)
 	assert.NoError(t, err, "failed to submit side chain parameters change")
@@ -133,7 +133,7 @@ func TestCSCParamUpdatesSequenceCorrect(t *testing.T) {
 	testClient.cl.BeginBlockSync(abci.RequestBeginBlock{Header: ctx.BlockHeader()})
 	for idx, cscParam := range cscParams {
 		cscParamsBz, err := Codec.MarshalJSON(cscParam)
-		proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(cscParamsBz), gov.ProposalTypeCSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"TNT", 2000e8}}, time.Second, "bsc")
+		proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(cscParamsBz), gov.ProposalTypeCSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"CE", 2000e8}}, time.Second, "bsc")
 		_, err = testClient.DeliverTxSync(&proposeMsg, testApp.Codec)
 		assert.NoError(t, err, "failed to submit side chain parameters change")
 
@@ -161,7 +161,7 @@ func TestCSCParamUpdatesSequenceCorrect(t *testing.T) {
 	testClient.cl.BeginBlockSync(abci.RequestBeginBlock{Header: ctx.BlockHeader()})
 	for _, cscParam := range cscParams {
 		cscParamsBz, err := Codec.MarshalJSON(cscParam)
-		proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(cscParamsBz), gov.ProposalTypeCSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"TNT", 2000e8}}, time.Second, "bsc")
+		proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(cscParamsBz), gov.ProposalTypeCSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"CE", 2000e8}}, time.Second, "bsc")
 		_, err = testClient.DeliverTxSync(&proposeMsg, testApp.Codec)
 		assert.NoError(t, err, "failed to submit side chain parameters change")
 	}
@@ -183,7 +183,7 @@ func TestCSCParamUpdatesSequenceCorrect(t *testing.T) {
 	testClient.cl.BeginBlockSync(abci.RequestBeginBlock{Header: ctx.BlockHeader()})
 	for idx, cscParam := range cscParams {
 		cscParamsBz, err := Codec.MarshalJSON(cscParam)
-		proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(cscParamsBz), gov.ProposalTypeCSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"TNT", 2000e8}}, time.Second, "bsc")
+		proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(cscParamsBz), gov.ProposalTypeCSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"CE", 2000e8}}, time.Second, "bsc")
 		_, err = testClient.DeliverTxSync(&proposeMsg, testApp.Codec)
 		assert.NoError(t, err, "failed to submit side chain parameters change")
 
@@ -245,7 +245,7 @@ func TestSubmitCSCParamUpdatesFail(t *testing.T) {
 
 	for _, cscParam := range cscParams {
 		cscParamsBz, err := Codec.MarshalJSON(cscParam)
-		proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(cscParamsBz), gov.ProposalTypeCSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"TNT", 2000e8}}, time.Second, "bsc")
+		proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(cscParamsBz), gov.ProposalTypeCSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"CE", 2000e8}}, time.Second, "bsc")
 		resp, err := testClient.DeliverTxSync(&proposeMsg, testApp.Codec)
 		assert.NoError(t, err, "failed to submit side chain parameters change")
 		assert.True(t, strings.Contains(resp.Log, "Invalid proposal"))
@@ -270,7 +270,7 @@ func TestSCParamUpdatesSuccess(t *testing.T) {
 			generatSCParamChange(nil, 0).SCParams[3],
 		}}
 	scParamsBz, err := Codec.MarshalJSON(scParams)
-	proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(scParamsBz), gov.ProposalTypeSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"TNT", 2000e8}}, time.Second, "bsc")
+	proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(scParamsBz), gov.ProposalTypeSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"CE", 2000e8}}, time.Second, "bsc")
 	res, err := testClient.DeliverTxSync(&proposeMsg, testApp.Codec)
 	fmt.Println(res)
 	assert.NoError(t, err, "failed to submit side chain parameters change")
@@ -316,7 +316,7 @@ func TestSCParamMultiUpdatesSuccess(t *testing.T) {
 	}
 	for idx, scParams := range scParamses {
 		scParamsBz, err := Codec.MarshalJSON(scParams)
-		proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(scParamsBz), gov.ProposalTypeSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"TNT", 2000e8}}, time.Second, "bsc")
+		proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(scParamsBz), gov.ProposalTypeSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"CE", 2000e8}}, time.Second, "bsc")
 		_, err = testClient.DeliverTxSync(&proposeMsg, testApp.Codec)
 		assert.NoError(t, err, "failed to submit side chain parameters change")
 
@@ -361,7 +361,7 @@ func TestSCParamUpdatesFail(t *testing.T) {
 	}
 	for _, scParams := range scParamses {
 		scParamsBz, err := Codec.MarshalJSON(scParams)
-		proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(scParamsBz), gov.ProposalTypeSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"TNT", 2000e8}}, time.Second, "bsc")
+		proposeMsg := gov.NewMsgSideChainSubmitProposal("testSideProposal", string(scParamsBz), gov.ProposalTypeSCParamsChange, sideValAddr, sdk.Coins{sdk.Coin{"CE", 2000e8}}, time.Second, "bsc")
 		res, err := testClient.DeliverTxSync(&proposeMsg, testApp.Codec)
 		assert.NoError(t, err)
 		assert.True(t, strings.Contains(res.Log, "Invalid proposal"))
@@ -418,7 +418,7 @@ func setupTest() (crypto.Address, sdk.Context, []sdk.Account) {
 	addr := secp256k1.GenPrivKey().PubKey().Address()
 	accAddr := sdk.AccAddress(addr)
 	baseAcc := auth.BaseAccount{Address: accAddr}
-	genTokens := []tokens.GenesisToken{{"TNT", "TNT", 100000000e8, accAddr, false}}
+	genTokens := []tokens.GenesisToken{{"CE", "CE", 100000000e8, accAddr, false}}
 	appAcc := &ctypes.AppAccount{baseAcc, "baseAcc", sdk.Coins(nil), sdk.Coins(nil), 0}
 	genAccs := make([]GenesisAccount, 1)
 	valAddr := ed25519.GenPrivKey().PubKey().Address()
@@ -440,7 +440,7 @@ func setupTest() (crypto.Address, sdk.Context, []sdk.Account) {
 	// it is required in fee distribution during end block
 	testApp.ValAddrCache.SetAccAddr(sdk.ConsAddress(valAddr), appAcc.Address)
 	ctx := testApp.DeliverState.Ctx
-	coins := sdk.Coins{sdk.NewCoin("TNT", 1e13)}
+	coins := sdk.Coins{sdk.NewCoin("CE", 1e13)}
 	var accs []sdk.Account
 	for i := 0; i < 10; i++ {
 		privKey := ed25519.GenPrivKey()
@@ -471,7 +471,7 @@ func setupTest() (crypto.Address, sdk.Context, []sdk.Account) {
 	ctx = UpdateContext(valAddr, ctx, 2, tNow)
 	testApp.SetCheckState(abci.Header{Time: tNow.AddDate(0, 0, -2)})
 	testClient.cl.BeginBlockSync(abci.RequestBeginBlock{Header: ctx.BlockHeader()})
-	msg := stake.NewMsgCreateSideChainValidator(sdk.ValAddress(sideValAddr), sdk.NewCoin("TNT", 5000000000000),
+	msg := stake.NewMsgCreateSideChainValidator(sdk.ValAddress(sideValAddr), sdk.NewCoin("CE", 5000000000000),
 		stake.NewDescription("m", "i", "w", "d"),
 		stake.NewCommissionMsg(sdk.NewDecWithPrec(1, 4), sdk.NewDecWithPrec(1, 4), sdk.NewDecWithPrec(1, 4)),
 		"bsc", sideValAddr, sideValAddr)

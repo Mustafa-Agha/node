@@ -126,7 +126,7 @@ func TestHandleListMiniWrongBaseSymbol(t *testing.T) {
 	result := handleListMini(ctx, orderKeeper, tokenMapper, dextypes.ListMiniMsg{
 		From:             sdk.AccAddress("testacc"),
 		BaseAssetSymbol:  "BTC",
-		QuoteAssetSymbol: "TNT",
+		QuoteAssetSymbol: "CE",
 		InitPrice:        1000,
 	})
 	//require.Equal(t, result.Code, sdk.ABCICodeOK)
@@ -143,7 +143,7 @@ func TestHandleListMiniRight(t *testing.T) {
 	result := handleListMini(ctx, orderKeeper, tokenMapper, dextypes.ListMiniMsg{
 		From:             sdk.AccAddress("testacc"),
 		BaseAssetSymbol:  "BTC-000M",
-		QuoteAssetSymbol: "TNT",
+		QuoteAssetSymbol: "CE",
 		InitPrice:        1000,
 	})
 	require.Equal(t, result.Code, sdk.ABCICodeOK)
@@ -159,7 +159,7 @@ func TestHandleListTinyRight(t *testing.T) {
 	result := handleListMini(ctx, orderKeeper, tokenMapper, dextypes.ListMiniMsg{
 		From:             sdk.AccAddress("testacc"),
 		BaseAssetSymbol:  "ETH-000M",
-		QuoteAssetSymbol: "TNT",
+		QuoteAssetSymbol: "CE",
 		InitPrice:        1000,
 	})
 	require.Equal(t, result.Code, sdk.ABCICodeOK)

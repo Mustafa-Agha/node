@@ -127,7 +127,7 @@ func TestListHandler(t *testing.T) {
 	})
 	require.Contains(t, result.Log, "proposal 1 does not exist")
 
-	proposal := getProposal(false, "BTC-000", "TNT")
+	proposal := getProposal(false, "BTC-000", "CE")
 
 	// wrong status
 	govKeeper.SetProposal(ctx, proposal)
@@ -137,7 +137,7 @@ func TestListHandler(t *testing.T) {
 	require.Contains(t, result.Log, "proposal status(DepositPeriod) should be Passed before you can list your token")
 
 	// wrong type
-	proposal = getProposal(false, "BTC-000", "TNT")
+	proposal = getProposal(false, "BTC-000", "CE")
 	proposal.SetProposalType(gov.ProposalTypeParameterChange)
 	proposal.SetStatus(gov.StatusPassed)
 	govKeeper.SetProposal(ctx, proposal)
@@ -147,7 +147,7 @@ func TestListHandler(t *testing.T) {
 	require.Contains(t, result.Log, "proposal type(ParameterChange) should be ListTradingPair")
 
 	// wrong params
-	proposal = getProposal(false, "BTC-000", "TNT")
+	proposal = getProposal(false, "BTC-000", "CE")
 	proposal.SetStatus(gov.StatusPassed)
 	proposal.SetDescription("wrong params")
 	govKeeper.SetProposal(ctx, proposal)
@@ -157,7 +157,7 @@ func TestListHandler(t *testing.T) {
 	require.Contains(t, result.Log, "illegal list params in proposal")
 
 	// msg not right
-	proposal = getProposal(false, "BTC-000", "TNT")
+	proposal = getProposal(false, "BTC-000", "CE")
 	proposal.SetStatus(gov.StatusPassed)
 	govKeeper.SetProposal(ctx, proposal)
 	result = handleList(ctx, orderKeeper, tokenMapper, govKeeper, dexTypes.ListMsg{
@@ -171,18 +171,18 @@ func TestListHandler(t *testing.T) {
 		QuoteAssetSymbol: "BNC",
 		ProposalId:       1,
 	})
-	require.Contains(t, result.Log, "quote asset symbol(BNC) is not identical to symbol in proposal(TNT)")
+	require.Contains(t, result.Log, "quote asset symbol(BNC) is not identical to symbol in proposal(CE)")
 
 	result = handleList(ctx, orderKeeper, tokenMapper, govKeeper, dexTypes.ListMsg{
 		BaseAssetSymbol:  "BTC-000",
-		QuoteAssetSymbol: "TNT",
+		QuoteAssetSymbol: "CE",
 		InitPrice:        100,
 		ProposalId:       1,
 	})
 	require.Contains(t, result.Log, "init price(100) is not identical to price in proposal(1000)")
 
 	// time expired
-	proposal = getProposal(false, "BTC-000", "TNT")
+	proposal = getProposal(false, "BTC-000", "CE")
 	proposal.SetStatus(gov.StatusPassed)
 	govKeeper.SetProposal(ctx, proposal)
 	expiredTime := time.Date(2018, 11, 28, 0, 0, 0, 0, time.UTC)
@@ -276,7 +276,7 @@ func TestListHandler_LowerCase(t *testing.T) {
 	})
 	require.Nil(t, err, "new token error")
 
-	proposal := getProposal(true, "BTC-000", "TNT")
+	proposal := getProposal(true, "BTC-000", "CE")
 	proposal.SetStatus(gov.StatusPassed)
 	govKeeper.SetProposal(ctx, proposal)
 	//ctx = sdk.NewContext(ms, abci.Header{}, sdk.RunTxModeDeliver, log.NewNopLogger())
@@ -310,14 +310,14 @@ func TestListHandler_WrongTradingPair(t *testing.T) {
 		From:             sdk.AccAddress("testacc"),
 	}
 	result := handleList(ctx, orderKeeper, tokenMapper, govKeeper, listMsg)
-	require.Contains(t, result.Log, fmt.Sprintf("token %s should be listed against TNT before against %s",
+	require.Contains(t, result.Log, fmt.Sprintf("token %s should be listed against CE before against %s",
 		baseAsset, quoteAsset))
 
 	pair := dexTypes.NewTradingPair(baseAsset, types.NativeTokenSymbol, 1000)
 	err := orderKeeper.PairMapper.AddTradingPair(ctx, pair)
 	require.Nil(t, err, "new trading pair error")
 	result = handleList(ctx, orderKeeper, tokenMapper, govKeeper, listMsg)
-	require.Contains(t, result.Log, fmt.Sprintf("token %s should be listed against TNT before listing %s against %s",
+	require.Contains(t, result.Log, fmt.Sprintf("token %s should be listed against CE before listing %s against %s",
 		quoteAsset, baseAsset, quoteAsset))
 }
 
@@ -342,7 +342,7 @@ func TestListHandler_AfterUpgrade(t *testing.T) {
 		Owner:       sdk.AccAddress("testacc"),
 	})
 	require.Nil(t, err, "new token error")
-	proposal := getProposal(true, "BTC-000", "TNT")
+	proposal := getProposal(true, "BTC-000", "CE")
 	proposal.SetStatus(gov.StatusPassed)
 	govKeeper.SetProposal(ctx, proposal)
 

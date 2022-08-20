@@ -7,9 +7,9 @@ set home [lindex $argv 3]
 
 set timeout 30
 	if {"${home}" == ""} {
-		spawn ./tntcli token refund --from $from --chain-id $chain_id --swap-id $swapID
+		spawn ./cecli token refund --from $from --chain-id $chain_id --swap-id $swapID
 	} else {
-		spawn ./tntcli token refund --home $home --from $from --chain-id $chain_id --swap-id $swapID
+		spawn ./cecli token refund --home $home --from $from --chain-id $chain_id --swap-id $swapID
 	}
 	expect "Password*"
 	send "12345678\r"

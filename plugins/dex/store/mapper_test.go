@@ -101,7 +101,7 @@ func TestMapper_DeleteTradingPair_Succeed(t *testing.T) {
 
 func TestMapper_ListAllTradingPairs(t *testing.T) {
 	pairMapper, ctx := setup()
-	err := pairMapper.AddTradingPair(ctx, dextypes.NewTradingPair("AAA-000", "TNT", 1e8))
+	err := pairMapper.AddTradingPair(ctx, dextypes.NewTradingPair("AAA-000", "CE", 1e8))
 	require.NoError(t, err)
 	pairMapper.AddTradingPair(ctx, dextypes.NewTradingPair("BBB-000", types.NativeTokenSymbol, 1e8))
 	require.NoError(t, err)
@@ -136,29 +136,29 @@ func TestMapper_DeleteRecentPrices(t *testing.T) {
 	pairMapper, ctx := setup()
 	for i := 0; i < 30; i++ {
 		lastPrices := make(map[string]int64, pairNum)
-		lastPrices["ABC_TNT"] = 10
+		lastPrices["ABC_CE"] = 10
 		lastPrices["ABC_EFG"] = 3
-		lastPrices["EFG_TNT"] = 3
+		lastPrices["EFG_CE"] = 3
 		ctx = ctx.WithBlockHeight(int64(priceStoreEvery * (i + 1)))
 		pairMapper.UpdateRecentPrices(ctx, priceStoreEvery, numPricesStored, lastPrices)
 	}
 
 	allRecentPrices := pairMapper.GetRecentPrices(ctx, priceStoreEvery, numPricesStored)
 	require.Equal(t, 3, len(allRecentPrices))
-	require.Equal(t, int64(5), allRecentPrices["ABC_TNT"].Count())
-	require.Equal(t, []interface{}{int64(10), int64(10), int64(10), int64(10), int64(10)}, allRecentPrices["ABC_TNT"].Elements())
+	require.Equal(t, int64(5), allRecentPrices["ABC_CE"].Count())
+	require.Equal(t, []interface{}{int64(10), int64(10), int64(10), int64(10), int64(10)}, allRecentPrices["ABC_CE"].Elements())
 	require.Equal(t, int64(5), allRecentPrices["ABC_EFG"].Count())
 	require.Equal(t, []interface{}{int64(3), int64(3), int64(3), int64(3), int64(3)}, allRecentPrices["ABC_EFG"].Elements())
 	require.Equal(t, int64(5), allRecentPrices["ABC_EFG"].Count())
-	require.Equal(t, []interface{}{int64(3), int64(3), int64(3), int64(3), int64(3)}, allRecentPrices["EFG_TNT"].Elements())
+	require.Equal(t, []interface{}{int64(3), int64(3), int64(3), int64(3), int64(3)}, allRecentPrices["EFG_CE"].Elements())
 
 	pairMapper.DeleteRecentPrices(ctx, "ABC_EFG")
 	allRecentPrices = pairMapper.GetRecentPrices(ctx, priceStoreEvery, numPricesStored)
 	require.Equal(t, 2, len(allRecentPrices))
-	require.Equal(t, int64(5), allRecentPrices["ABC_TNT"].Count())
-	require.Equal(t, []interface{}{int64(10), int64(10), int64(10), int64(10), int64(10)}, allRecentPrices["ABC_TNT"].Elements())
-	require.Equal(t, int64(5), allRecentPrices["EFG_TNT"].Count())
-	require.Equal(t, []interface{}{int64(3), int64(3), int64(3), int64(3), int64(3)}, allRecentPrices["EFG_TNT"].Elements())
+	require.Equal(t, int64(5), allRecentPrices["ABC_CE"].Count())
+	require.Equal(t, []interface{}{int64(10), int64(10), int64(10), int64(10), int64(10)}, allRecentPrices["ABC_CE"].Elements())
+	require.Equal(t, int64(5), allRecentPrices["EFG_CE"].Count())
+	require.Equal(t, []interface{}{int64(3), int64(3), int64(3), int64(3), int64(3)}, allRecentPrices["EFG_CE"].Elements())
 }
 
 func TestMapper_DeleteOneRecentPrices(t *testing.T) {
@@ -169,22 +169,22 @@ func TestMapper_DeleteOneRecentPrices(t *testing.T) {
 	for i := 0; i < numPricesStored; i++ {
 		lastPrices := make(map[string]int64, pairNum)
 		if i < 5 {
-			lastPrices["ABC_TNT"] = 10
+			lastPrices["ABC_CE"] = 10
 		}
 		ctx = ctx.WithBlockHeight(int64(2 * (i + 1)))
 		pairMapper.UpdateRecentPrices(ctx, priceStoreEvery, numPricesStored, lastPrices)
 	}
 	allRecentPrices := pairMapper.GetRecentPrices(ctx, priceStoreEvery, numPricesStored)
 	require.Equal(t, 1, len(allRecentPrices))
-	require.Equal(t, int64(5), allRecentPrices["ABC_TNT"].Count())
-	require.Equal(t, []interface{}{int64(10), int64(10), int64(10), int64(10), int64(10)}, allRecentPrices["ABC_TNT"].Elements())
+	require.Equal(t, int64(5), allRecentPrices["ABC_CE"].Count())
+	require.Equal(t, []interface{}{int64(10), int64(10), int64(10), int64(10), int64(10)}, allRecentPrices["ABC_CE"].Elements())
 
-	pairMapper.DeleteRecentPrices(ctx, "ABC_TNT")
+	pairMapper.DeleteRecentPrices(ctx, "ABC_CE")
 	allRecentPrices = pairMapper.GetRecentPrices(ctx, priceStoreEvery, numPricesStored)
 	require.Equal(t, 0, len(allRecentPrices))
 
 	//allowed to delete again
-	pairMapper.DeleteRecentPrices(ctx, "ABC_TNT")
+	pairMapper.DeleteRecentPrices(ctx, "ABC_CE")
 	allRecentPrices = pairMapper.GetRecentPrices(ctx, priceStoreEvery, numPricesStored)
 	require.Equal(t, 0, len(allRecentPrices))
 }

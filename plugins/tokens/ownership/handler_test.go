@@ -24,8 +24,8 @@ func setup() (sdk.Context, sdk.Handler, sdk.Handler, auth.AccountKeeper, store.M
 	ms, capKey1, capKey2 := testutils.SetupMultiStoreForUnitTest()
 	cdc := wire.NewCodec()
 	cdc.RegisterInterface((*types.IToken)(nil), nil)
-	cdc.RegisterConcrete(&types.Token{}, "tntchain/Token", nil)
-	cdc.RegisterConcrete(&types.MiniToken{}, "tntchain/MiniToken", nil)
+	cdc.RegisterConcrete(&types.Token{}, "cechain/Token", nil)
+	cdc.RegisterConcrete(&types.MiniToken{}, "cechain/MiniToken", nil)
 	tokenMapper := store.NewMapper(cdc, capKey1)
 	//app.AccountKeeper = auth.NewAccountKeeper(cdc, common.AccountStoreKey, types.ProtoAppAccount)
 	accountKeeper := auth.NewAccountKeeper(cdc, capKey2, types.ProtoAppAccount)
@@ -48,7 +48,7 @@ func TestHandleTransferTokenOwner(t *testing.T) {
 	_, acc := testutils.NewAccount(ctx, accountKeeper, 100e8)
 
 	ctx = ctx.WithValue(baseapp.TxHashKey, "000")
-	issueMsg := issue.NewIssueMsg(originOwner.GetAddress(), "New TNT", "NNB", 10000e8, false)
+	issueMsg := issue.NewIssueMsg(originOwner.GetAddress(), "New CE", "NNB", 10000e8, false)
 	sdkResult := issueHandler(ctx, issueMsg)
 	require.Equal(t, true, sdkResult.Code.IsOK())
 
@@ -90,7 +90,7 @@ func TestHandleTransferMiniTokenOwner(t *testing.T) {
 	_, acc := testutils.NewAccount(ctx, accountKeeper, 100e8)
 
 	ctx = ctx.WithValue(baseapp.TxHashKey, "000")
-	issueMsg := issue.NewIssueMiniMsg(originOwner.GetAddress(), "New TNT", "NNB", 10000e8, false, "http://www.xyz.com/nnb.json")
+	issueMsg := issue.NewIssueMiniMsg(originOwner.GetAddress(), "New CE", "NNB", 10000e8, false, "http://www.xyz.com/nnb.json")
 	sdkResult := issueHandler(ctx, issueMsg)
 	require.Equal(t, true, sdkResult.Code.IsOK())
 

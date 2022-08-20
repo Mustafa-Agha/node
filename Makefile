@@ -21,7 +21,7 @@ BUILD_CLI_FLAGS = -tags "${BUILD_CLI_TAGS}" -ldflags "-X github.com/Mustafa-Agha
 # Without -lstdc++ on CentOS we will encounter link error, solution comes from: https://stackoverflow.com/a/29285011/1147187
 BUILD_CGOFLAGS = CGO_ENABLED=1 CGO_LDFLAGS="-lleveldb -lsnappy -lstdc++"
 BUILD_CFLAGS = ${BUILD_FLAGS} -tags "cleveldb"
-BUILD_TESTNET_FLAGS = ${BUILD_CLI_FLAGS} -ldflags "-X github.com/Mustafa-Agha/node/app.Bech32PrefixAccAddr=ttnt"
+BUILD_TESTNET_FLAGS = ${BUILD_CLI_FLAGS} -ldflags "-X github.com/Mustafa-Agha/node/app.Bech32PrefixAccAddr=tce"
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -71,10 +71,10 @@ ci: build
 ### Build
 
 define buildwindows
-     go build $(BUILD_CLI_FLAGS) -o build/tntcli.exe ./cmd/tntcli
-     go build $(BUILD_TESTNET_FLAGS) -o build/ttntcli.exe ./cmd/tntcli
-     go build $(BUILD_FLAGS) -o build/tntchaind.exe ./cmd/tntchaind
-     go build $(BUILD_FLAGS) -o build/tntsentry.exe ./cmd/tntsentry
+     go build $(BUILD_CLI_FLAGS) -o build/cecli.exe ./cmd/cecli
+     go build $(BUILD_TESTNET_FLAGS) -o build/tcecli.exe ./cmd/cecli
+     go build $(BUILD_FLAGS) -o build/cechaind.exe ./cmd/cechaind
+     go build $(BUILD_FLAGS) -o build/cesentry.exe ./cmd/cesentry
      go build $(BUILD_FLAGS) -o build/pressuremaker.exe ./cmd/pressuremaker
      go build $(BUILD_FLAGS) -o build/lightd.exe ./cmd/lightd
 endef
@@ -84,10 +84,10 @@ build:
 ifeq ($(OS),Windows_NT)
 	$(call buildwindows)
 else
-	go build $(BUILD_CLI_FLAGS) -o build/tntcli ./cmd/tntcli
-	go build $(BUILD_TESTNET_FLAGS) -o build/ttntcli ./cmd/tntcli
-	go build $(BUILD_FLAGS) -o build/tntchaind ./cmd/tntchaind
-	go build $(BUILD_FLAGS) -o build/tntsentry ./cmd/tntsentry
+	go build $(BUILD_CLI_FLAGS) -o build/cecli ./cmd/cecli
+	go build $(BUILD_TESTNET_FLAGS) -o build/tcecli ./cmd/cecli
+	go build $(BUILD_FLAGS) -o build/cechaind ./cmd/cechaind
+	go build $(BUILD_FLAGS) -o build/cesentry ./cmd/cesentry
 	go build $(BUILD_FLAGS) -o build/pressuremaker ./cmd/pressuremaker
 	go build $(BUILD_FLAGS) -o build/lightd ./cmd/lightd
 	go build $(BUILD_FLAGS) -o build/state_recover ./networks/tools/state_recover
@@ -96,18 +96,18 @@ endif
 
 build_c:
 ifeq ($(OS),Windows_NT)
-	go build $(BUILD_CLI_FLAGS) -o build/tntcli.exe ./cmd/tntcli
-	go build $(BUILD_TESTNET_FLAGS) -o build/ttntcli.exe ./cmd/tntcli
-	$(BUILD_CGOFLAGS) go build $(BUILD_CFLAGS) -o build/tntchaind.exe ./cmd/tntchaind
-	$(BUILD_CGOFLAGS) go build $(BUILD_CFLAGS) -o build/tntsentry.exe ./cmd/tntsentry
+	go build $(BUILD_CLI_FLAGS) -o build/cecli.exe ./cmd/cecli
+	go build $(BUILD_TESTNET_FLAGS) -o build/tcecli.exe ./cmd/cecli
+	$(BUILD_CGOFLAGS) go build $(BUILD_CFLAGS) -o build/cechaind.exe ./cmd/cechaind
+	$(BUILD_CGOFLAGS) go build $(BUILD_CFLAGS) -o build/cesentry.exe ./cmd/cesentry
 	go build $(BUILD_FLAGS) -o build/pressuremaker.exe ./cmd/pressuremaker
 	$(BUILD_CGOFLAGS) go build $(BUILD_CFLAGS) -o build/lightd.exe ./cmd/lightd
 	go build $(BUILD_FLAGS) -o build/state_recover.exe ./networks/tools/state_recover
 else
-	go build $(BUILD_CLI_FLAGS) -o build/tntcli ./cmd/tntcli
-	go build $(BUILD_TESTNET_FLAGS) -o build/ttntcli ./cmd/tntcli
-	$(BUILD_CGOFLAGS) go build $(BUILD_CFLAGS) -o build/tntchaind ./cmd/tntchaind
-	$(BUILD_CGOFLAGS) go build $(BUILD_CFLAGS) -o build/tntsentry ./cmd/tntsentry
+	go build $(BUILD_CLI_FLAGS) -o build/cecli ./cmd/cecli
+	go build $(BUILD_TESTNET_FLAGS) -o build/tcecli ./cmd/cecli
+	$(BUILD_CGOFLAGS) go build $(BUILD_CFLAGS) -o build/cechaind ./cmd/cechaind
+	$(BUILD_CGOFLAGS) go build $(BUILD_CFLAGS) -o build/cesentry ./cmd/cesentry
 	go build $(BUILD_FLAGS) -o build/pressuremaker ./cmd/pressuremaker
 	$(BUILD_CGOFLAGS) go build $(BUILD_CFLAGS) -o build/lightd ./cmd/lightd
 	go build $(BUILD_FLAGS) -o build/state_recover ./networks/tools/state_recover
@@ -129,14 +129,14 @@ build-alpine_c:
     LEDGER_ENABLED=false GOOS=linux GOARCH=amd64 CGO_ENABLED=0 $(MAKE) build_c
 
 install:
-	go install $(BUILD_FLAGS) ./cmd/tntchaind
-	go install $(BUILD_CLI_FLAGS) ./cmd/tntcli
-	go install $(BUILD_FLAGS) ./cmd/tntsentry
+	go install $(BUILD_FLAGS) ./cmd/cechaind
+	go install $(BUILD_CLI_FLAGS) ./cmd/cecli
+	go install $(BUILD_FLAGS) ./cmd/cesentry
 
 install_c:
-	$(BUILD_CGOFLAGS) go install $(BUILD_CFLAGS) ./cmd/tntchaind
-	go install $(BUILD_CLI_FLAGS) ./cmd/tntcli
-	go install $(BUILD_FLAGS) ./cmd/tntsentry
+	$(BUILD_CGOFLAGS) go install $(BUILD_CFLAGS) ./cmd/cechaind
+	go install $(BUILD_CLI_FLAGS) ./cmd/cecli
+	go install $(BUILD_FLAGS) ./cmd/cesentry
 
 ########################################
 ### Format
@@ -209,7 +209,7 @@ build-docker-node:
 
 # Run a 4-node testnet locally
 localnet-start: localnet-stop
-	@if ! [ -f build/node0/gaiad/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/tntchaind:Z binance/tntdnode testnet --v 4 -o . --starting-ip-address 172.20.0.2 ; fi
+	@if ! [ -f build/node0/gaiad/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/cechaind:Z binance/cednode testnet --v 4 -o . --starting-ip-address 172.20.0.2 ; fi
 	@for i in `seq 0 3`; do \
 		if [ "$(SKIP_TIMEOUT)" = "true" ]; then \
 			sed -i -e "s/skip_timeout_commit = false/skip_timeout_commit = true/g" ./build/node$$i/gaiad/config/config.toml;\

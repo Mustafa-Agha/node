@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ./order.sh --list-pair BTC_TNT --side 1 --price 1 --quantity 100 --from alice --tif 1
+# ./order.sh --list-pair BTC_CE --side 1 --price 1 --quantity 100 --from alice --tif 1
 
 chain_id=$CHAIN_ID
 id="$(od -x /dev/urandom | head -1 | awk '{OFS="-"; print $2$3,$4,$5,$6,$7$8$9}')"

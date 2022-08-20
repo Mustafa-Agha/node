@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	// tnt prefix address:  tnt1v8vkkymvhe2sf7gd2092ujc6hweta38xadu2pj
-	// ttnt prefix address: ttnt1v8vkkymvhe2sf7gd2092ujc6hweta38xnc4wpr
+	// ce prefix address:  ce1v8vkkymvhe2sf7gd2092ujc6hweta38xadu2pj
+	// tce prefix address: tce1v8vkkymvhe2sf7gd2092ujc6hweta38xnc4wpr
 	PegAccount = sdk.AccAddress(crypto.AddressHash([]byte("BinanceChainPegAccount")))
 )

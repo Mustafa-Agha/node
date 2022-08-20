@@ -346,10 +346,10 @@ const (
 								"doc":"Overall tx count, including this block"
 							},
 							{
-								"name":"tntBlockMeta",
+								"name":"ceBlockMeta",
 								"type":{
 									"type":"record",
-									"name":"tntBlockMeta",
+									"name":"ceBlockMeta",
 									"doc":"binance-specific block data",
 									"fields":[
 										{
@@ -472,10 +472,10 @@ const (
 												"default":""
 											},
 											{
-												"name":"tntTransaction",
+												"name":"ceTransaction",
 												"type":{
 													"type":"record",
-													"name":"tntTransaction",
+													"name":"ceTransaction",
 													"doc":"binance-specific transaction data.",
 													"fields":[
 														{

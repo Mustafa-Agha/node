@@ -55,7 +55,7 @@ func handleUnbindMsg(ctx sdk.Context, keeper Keeper, msg UnbindMsg) sdk.Result {
 		return sdkErr.Result()
 	}
 
-	bscRelayFee, sdkErr := types.ConvertBCAmountToBSCAmount(types.BSCTNTDecimals, relayFee.Tokens.AmountOf(cmmtypes.NativeTokenSymbol))
+	bscRelayFee, sdkErr := types.ConvertBCAmountToBSCAmount(types.BSCCEDecimals, relayFee.Tokens.AmountOf(cmmtypes.NativeTokenSymbol))
 	if sdkErr != nil {
 		return sdkErr.Result()
 	}
@@ -162,7 +162,7 @@ func handleBindMsg(ctx sdk.Context, keeper Keeper, msg BindMsg) sdk.Result {
 	if sdkErr != nil {
 		return sdkErr.Result()
 	}
-	bscRelayFee, sdkErr := types.ConvertBCAmountToBSCAmount(types.BSCTNTDecimals, relayFee.Tokens.AmountOf(cmmtypes.NativeTokenSymbol))
+	bscRelayFee, sdkErr := types.ConvertBCAmountToBSCAmount(types.BSCCEDecimals, relayFee.Tokens.AmountOf(cmmtypes.NativeTokenSymbol))
 	if sdkErr != nil {
 		return sdkErr.Result()
 	}
@@ -264,7 +264,7 @@ func handleTransferOutMsg(ctx sdk.Context, keeper Keeper, msg TransferOutMsg) sd
 		return sdkErr.Result()
 	}
 
-	bscRelayFee, sdkErr := types.ConvertBCAmountToBSCAmount(types.BSCTNTDecimals, relayFee.Tokens.AmountOf(cmmtypes.NativeTokenSymbol))
+	bscRelayFee, sdkErr := types.ConvertBCAmountToBSCAmount(types.BSCCEDecimals, relayFee.Tokens.AmountOf(cmmtypes.NativeTokenSymbol))
 	if sdkErr != nil {
 		return sdkErr.Result()
 	}

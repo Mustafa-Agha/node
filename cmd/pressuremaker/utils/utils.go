@@ -1,4 +1,4 @@
-//nolint
+// nolint
 package utils
 
 import (
@@ -33,7 +33,7 @@ type MessageGenerator struct {
 }
 
 func (mg *MessageGenerator) Setup() {
-	coins := sdk.Coins{sdk.NewCoin("TNT", 10000000000000000), sdk.NewCoin("NNB", 10000000000000000)}
+	coins := sdk.Coins{sdk.NewCoin("CE", 10000000000000000), sdk.NewCoin("NNB", 10000000000000000)}
 	_, mg.buyerAddrs, _, _ = mock.CreateGenAccounts(mg.NumOfTradesPerBlock, coins)
 	_, mg.sellerAddrs, _, _ = mock.CreateGenAccounts(mg.NumOfTradesPerBlock, coins)
 	_, mg.sendAddrs, _, _ = mock.CreateGenAccounts(mg.NumOfTransferPerBlock, coins)
@@ -65,12 +65,12 @@ func (mg *MessageGenerator) OneOnOneMessages(height int, timeNow time.Time) (tra
 
 		tradesToPublish[i] = makeTradeToPub(fmt.Sprintf("%d-%d", height, i), sellOrder.Id, buyOrder.Id, mg.sellerAddrs[i].String(), mg.buyerAddrs[i].String(), price, amount)
 
-		accounts[mg.buyerAddrs[i].String()] = pub.Account{string(mg.buyerAddrs[i]), "", 0, []*pub.AssetBalance{{"NNB", 10000000000000000 + 100000000*int64(seq), 0, 0}, {"TNT", 10000000000000000 - 100000000*int64(seq), 0, 0}}}
-		accounts[mg.sellerAddrs[i].String()] = pub.Account{string(mg.sellerAddrs[i]), "", 0, []*pub.AssetBalance{{"NNB", 10000000000000000 - 100000000*int64(seq), 0, 0}, {"TNT", 10000000000000000 + 100000000*int64(seq), 0, 0}}}
+		accounts[mg.buyerAddrs[i].String()] = pub.Account{string(mg.buyerAddrs[i]), "", 0, []*pub.AssetBalance{{"NNB", 10000000000000000 + 100000000*int64(seq), 0, 0}, {"CE", 10000000000000000 - 100000000*int64(seq), 0, 0}}}
+		accounts[mg.sellerAddrs[i].String()] = pub.Account{string(mg.sellerAddrs[i]), "", 0, []*pub.AssetBalance{{"NNB", 10000000000000000 - 100000000*int64(seq), 0, 0}, {"CE", 10000000000000000 + 100000000*int64(seq), 0, 0}}}
 	}
 	transfers = &pub.Transfers{Height: int64(height), Num: 0, Transfers: []pub.Transfer{}}
 	for i := 0; i < mg.NumOfTransferPerBlock; i++ {
-		t := pub.Transfer{From: mg.sendAddrs[i].String(), To: []pub.Receiver{{mg.receiverAddrs[i].String(), []pub.Coin{{"TNT", rand.Int63n(math.MaxInt64)}}}, {mg.receiverAddrs[2*i+1].String(), []pub.Coin{{"BTC", rand.Int63n(math.MaxInt64)}}}}}
+		t := pub.Transfer{From: mg.sendAddrs[i].String(), To: []pub.Receiver{{mg.receiverAddrs[i].String(), []pub.Coin{{"CE", rand.Int63n(math.MaxInt64)}}}, {mg.receiverAddrs[2*i+1].String(), []pub.Coin{{"BTC", rand.Int63n(math.MaxInt64)}}}}}
 		transfers.Transfers = append(transfers.Transfers, t)
 	}
 
@@ -113,13 +113,13 @@ func (mg *MessageGenerator) TwoOnOneMessages(height int, timeNow time.Time) (tra
 				mg.buyerAddrs[i].String(), 100000000, 100000000)
 			mg.OrderChangeMap[buyOrder.Id] = &buyOrder
 			mg.OrderChangeMap[sellOrder.Id] = &sellOrder
-			accounts[mg.buyerAddrs[i/2].String()] = pub.Account{string(mg.buyerAddrs[i].String()), "", 0, []*pub.AssetBalance{{"NNB", 10000000000000000 + 100000000*int64(height), 0, 0}, {"TNT", 10000000000000000 - 100000000*int64(height), 0, 0}}}
-			accounts[mg.sellerAddrs[i].String()] = pub.Account{string(mg.sellerAddrs[i].String()), "", 0, []*pub.AssetBalance{{"NNB", 10000000000000000 - 200000000*int64(height), 0, 0}, {"TNT", 10000000000000000 + 200000000*int64(height), 0, 0}}}
+			accounts[mg.buyerAddrs[i/2].String()] = pub.Account{string(mg.buyerAddrs[i].String()), "", 0, []*pub.AssetBalance{{"NNB", 10000000000000000 + 100000000*int64(height), 0, 0}, {"CE", 10000000000000000 - 100000000*int64(height), 0, 0}}}
+			accounts[mg.sellerAddrs[i].String()] = pub.Account{string(mg.sellerAddrs[i].String()), "", 0, []*pub.AssetBalance{{"NNB", 10000000000000000 - 200000000*int64(height), 0, 0}, {"CE", 10000000000000000 + 200000000*int64(height), 0, 0}}}
 		}
 	}
 	transfers = &pub.Transfers{Height: int64(height), Num: 0, Transfers: []pub.Transfer{}}
 	for i := 0; i < mg.NumOfTransferPerBlock; i++ {
-		t := pub.Transfer{From: mg.sendAddrs[i].String(), To: []pub.Receiver{{mg.receiverAddrs[i].String(), []pub.Coin{{"TNT", rand.Int63n(math.MaxInt64)}}}, {mg.receiverAddrs[2*i+1].String(), []pub.Coin{{"BTC", rand.Int63n(math.MaxInt64)}}}}}
+		t := pub.Transfer{From: mg.sendAddrs[i].String(), To: []pub.Receiver{{mg.receiverAddrs[i].String(), []pub.Coin{{"CE", rand.Int63n(math.MaxInt64)}}}, {mg.receiverAddrs[2*i+1].String(), []pub.Coin{{"BTC", rand.Int63n(math.MaxInt64)}}}}}
 		transfers.Transfers = append(transfers.Transfers, t)
 	}
 	return
@@ -167,7 +167,7 @@ func makeOrderInfo(sender sdk.AccAddress, side int8, height, price, qty, cumQty,
 		NewOrderMsg: orderPkg.NewOrderMsg{
 			Sender:      sender,
 			Id:          orderPkg.GenerateOrderID(height, sender),
-			Symbol:      "NNB_TNT",
+			Symbol:      "NNB_CE",
 			OrderType:   0,
 			Side:        side,
 			Price:       price,
@@ -186,7 +186,7 @@ func makeOrderInfo(sender sdk.AccAddress, side int8, height, price, qty, cumQty,
 func makeTradeToPub(id, sid, bid, saddr, baddr string, price, qty int64) *pub.Trade {
 	return &pub.Trade{
 		id,
-		"NNB_TNT",
+		"NNB_CE",
 		price,
 		qty,
 		sid,

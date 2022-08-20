@@ -138,8 +138,8 @@ func (k Keeper) SetContractDecimals(ctx sdk.Context, contractAddr types.SmartCha
 
 func (k Keeper) GetContractDecimals(ctx sdk.Context, contractAddr types.SmartChainAddress) int8 {
 	if sdk.IsUpgrade(upgrade.FixFailAckPackage) {
-		if strings.ToLower(contractAddr.String()) == types.TNTContractAddr {
-			return types.TNTContractDecimals
+		if strings.ToLower(contractAddr.String()) == types.CEContractAddr {
+			return types.CEContractDecimals
 		}
 	}
 

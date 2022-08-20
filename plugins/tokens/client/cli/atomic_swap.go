@@ -39,8 +39,8 @@ func initiateHTLTCmd(cmdr Commander) *cobra.Command {
 	}
 
 	cmd.Flags().String(flagRecipientAddr, "", "The recipient address of BEP2 token, bech32 encoding")
-	cmd.Flags().String(flagAmount, "", "The swapped out amount BEP2 tokens, example: \"100:TNT\" or \"100:TNT,10000:BTCB-1DE\"")
-	cmd.Flags().String(flagExpectedIncome, "", "Expected income from swap counter party, example: \"100:TNT\" or \"100:TNT,10000:BTCB-1DE\"")
+	cmd.Flags().String(flagAmount, "", "The swapped out amount BEP2 tokens, example: \"100:CE\" or \"100:CE,10000:BTCB-1DE\"")
+	cmd.Flags().String(flagExpectedIncome, "", "Expected income from swap counter party, example: \"100:CE\" or \"100:CE,10000:BTCB-1DE\"")
 	cmd.Flags().String(flagRecipientOtherChain, "", "The recipient address on other chain, like Ethereum, leave it empty for single chain swap")
 	cmd.Flags().String(flagSenderOtherChain, "", "The sender address on other chain, like Ethereum, leave it empty for single chain swap")
 	cmd.Flags().String(flagRandomNumberHash, "", "RandomNumberHash of random number and timestamp, based on SHA256, 32 bytes, hex encoding. If left out, a random value will be generated")
@@ -113,7 +113,7 @@ func depositHTLTCmd(cmdr Commander) *cobra.Command {
 		RunE:  cmdr.depositHTLT,
 	}
 
-	cmd.Flags().String(flagAmount, "", "The swapped out amount BEP2 tokens, example: \"100:TNT\" or \"100:TNT,10000:BTCB-1DE\"")
+	cmd.Flags().String(flagAmount, "", "The swapped out amount BEP2 tokens, example: \"100:CE\" or \"100:CE,10000:BTCB-1DE\"")
 	cmd.Flags().String(flagSwapID, "", "ID of previously created swap, hex encoding")
 
 	return cmd
